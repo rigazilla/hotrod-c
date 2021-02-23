@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hotrod_2dc_2ecpp_3',['hotrod-c.cpp',['../hotrod-c_8cpp.html',1,'']]]
+  ['error_20response_20code_3',['Error response code',['../group__ErrorResponseCode.html',1,'']]]
 ];

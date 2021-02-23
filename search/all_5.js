@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ok_5',['OK',['../group__ErrorResponseCode.html#ga34e2956ff8fd55ca4bb758425bf36449',1,'hotrod-c.cpp']]]
+  ['invalid_5fmagic_5for_5fmessage_5fid_5fstatus_5',['INVALID_MAGIC_OR_MESSAGE_ID_STATUS',['../group__ErrorResponseCode.html#ga04102cec4fbe151dc4b2d19bef96724c',1,'hotrod-c.cpp']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['error_20response_20code_2',['Error response code',['../group__ErrorResponseCode.html',1,'']]]
+  ['command_5ftimeout_5fstatus_2',['COMMAND_TIMEOUT_STATUS',['../group__ErrorResponseCode.html#ga597eeaf2df3d0edeb7622889f0654771',1,'hotrod-c.cpp']]]
 ];
