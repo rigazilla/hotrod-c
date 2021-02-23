@@ -1,6 +1,18 @@
 #include <iostream>
 #include <stdint.h>
 
+/*! \mainpage A Reference Implementation in plain C for Hotrod protocol 2.8+
+
+ *
+ * \section intro_sec Introduction
+ *
+ * This project aims to provide a C library that speeds up Infinispan Hotrod clients development and is:
+ * - easy to understand and extends;
+ * - easy to use and install;
+ * - easy to translate in other languages.
+ *
+ */
+
 /**
  * @file
  * @brief This is the C implementation of the hotrod 3.0 protocol for client.
