@@ -11,6 +11,20 @@
  * - easy to use and install;
  * - easy to translate in other languages.
  *
+ * \section Implementing in other languages
+ * 
+ * C code is written as plain a possible, it should be quite easy to understand and translate.
+ * 
+ * Byte stream to hotrod data struct translation requires a `streamReader` function able to read bytes from
+ * the stream gived a preallocated buffer and the number of bytes to be read.
+ * 
+ * Implementation roadmap should go through:
+ * how read n bytes     @see readBytes
+ * how to read 1 byte   @see readByte
+ * VInt                 @see readVInt
+ * VLong                @see readVLong
+ * responseHeader       @see readResponseHeader @see responseHeader
+ * 
  */
 
 /**
@@ -145,7 +159,7 @@ int readResponseError(u_int8_t status, streamReader reader, u_int8_t *&error) {
     return 0;
 }
 /**
- *  readHeader populates and header a 3.0 hotrod response
+ *  readResponseHeader populates and header a 3.0 hotrod response
  *  
  * Hotrod 3.0 response header description
  * 
@@ -157,7 +171,7 @@ int readResponseError(u_int8_t status, streamReader reader, u_int8_t *&error) {
  * Status Code | 1 | status code | @ref ErrorResponseCode |
  * Error Message | array | optional | @ref readResponseError, @ref readBytes | 
  */
-int readHeader(streamReader reader, responseHeader &hdr, int &errcode, u_int8_t *&errmessage) {
+int readResponseHeader(streamReader reader, responseHeader &hdr, int &errcode, u_int8_t *&errmessage) {
     hdr.magic = readByte(reader);
     hdr.messageId = readVLong(reader);
     hdr.opCode = readByte(reader);
