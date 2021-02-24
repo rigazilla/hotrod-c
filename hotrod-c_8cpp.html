@@ -113,8 +113,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a9adca9db19828c3df65efd818578d594"><td class="memItemLeft" align="right" valign="top"><a id="a9adca9db19828c3df65efd818578d594"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>readResponseError</b> (u_int8_t status, streamReader reader, u_int8_t *&amp;error)</td></tr>
 <tr class="separator:a9adca9db19828c3df65efd818578d594"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f764dfda352b48e7583a19336edda35"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a1f764dfda352b48e7583a19336edda35">readHeader</a> (streamReader reader, <a class="el" href="structresponseHeader.html">responseHeader</a> &amp;hdr, int &amp;errcode, u_int8_t *&amp;errmessage)</td></tr>
-<tr class="separator:a1f764dfda352b48e7583a19336edda35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3cb96fadb263e51e027d39b1618b974"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#ae3cb96fadb263e51e027d39b1618b974">readResponseHeader</a> (streamReader reader, <a class="el" href="structresponseHeader.html">responseHeader</a> &amp;hdr, int &amp;errcode, u_int8_t *&amp;errmessage)</td></tr>
+<tr class="separator:ae3cb96fadb263e51e027d39b1618b974"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af68a9b4550d013b8a4cbd5c48b2ff64b"><td class="memItemLeft" align="right" valign="top"><a id="af68a9b4550d013b8a4cbd5c48b2ff64b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>say_hello</b> ()</td></tr>
 <tr class="separator:af68a9b4550d013b8a4cbd5c48b2ff64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,14 +202,14 @@ const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 
 </div>
 </div>
-<a id="a1f764dfda352b48e7583a19336edda35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f764dfda352b48e7583a19336edda35">&#9670;&nbsp;</a></span>readHeader()</h2>
+<a id="ae3cb96fadb263e51e027d39b1618b974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3cb96fadb263e51e027d39b1618b974">&#9670;&nbsp;</a></span>readResponseHeader()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int readHeader </td>
+          <td class="memname">int readResponseHeader </td>
           <td>(</td>
           <td class="paramtype">streamReader&#160;</td>
           <td class="paramname"><em>reader</em>, </td>
@@ -239,7 +239,7 @@ const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>readHeader populates and header a 3.0 hotrod response</p>
+<p>readResponseHeader populates and header a 3.0 hotrod response</p>
 <p>Hotrod 3.0 response header description</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">

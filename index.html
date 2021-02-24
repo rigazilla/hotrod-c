@@ -70,8 +70,23 @@ Introduction</h1>
 <p>This project aims to provide a C library that speeds up Infinispan Hotrod clients development and is:</p><ul>
 <li>easy to understand and extends;</li>
 <li>easy to use and install;</li>
-<li>easy to translate in other languages. </li>
+<li>easy to translate in other languages.</li>
 </ul>
+<h1><a class="anchor" id="Implementing"></a>
+in other languages</h1>
+<p>C code is written as plain a possible, it should be quite easy to understand and translate.</p>
+<p>Byte stream to hotrod data struct translation requires a <code>streamReader</code> function able to read bytes from the stream gived a preallocated buffer and the number of bytes to be read.</p>
+<p>Implementation roadmap should go through: how read n bytes </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="hotrod-c_8cpp.html#ae63e5dce10cad2647f1c4e547f3d9f9d">readBytes</a> how to read 1 byte </dd>
+<dd>
+<a class="el" href="hotrod-c_8cpp.html#a6bdd5f7bc91f91d8a67bdd6984a01c06">readByte</a> VInt </dd>
+<dd>
+<a class="el" href="hotrod-c_8cpp.html#ab8ec7d3d664a4afcc35b28dab697a0f1">readVInt</a> VLong </dd>
+<dd>
+<a class="el" href="hotrod-c_8cpp.html#a413d0bce7d3c3bb63045faf7487dcf2f">readVLong</a> <a class="el" href="structresponseHeader.html">responseHeader</a> </dd>
+<dd>
+<a class="el" href="hotrod-c_8cpp.html#ae3cb96fadb263e51e027d39b1618b974">readResponseHeader</a> </dd>
+<dd>
+<a class="el" href="structresponseHeader.html">responseHeader</a> </dd></dl>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
