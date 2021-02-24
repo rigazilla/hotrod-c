@@ -19,11 +19,11 @@
  * the stream gived a preallocated buffer and the number of bytes to be read.
  * 
  * Implementation roadmap should go through:
- * how read n bytes     @see readBytes
- * how to read 1 byte   @see readByte
- * VInt                 @see readVInt
- * VLong                @see readVLong
- * responseHeader       @see readResponseHeader @see responseHeader
+ * how read n bytes     see readBytes()
+ * how to read 1 byte   see readByte()
+ * VInt                 see readVInt()
+ * VLong                see readVLong()
+ * responseHeader       see readResponseHeader() and ::responseHeader
  * 
  */
 
