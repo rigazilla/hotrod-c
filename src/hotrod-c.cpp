@@ -383,7 +383,10 @@ void writeRequestWithKey(streamWriter writer, requestHeader &hdr, byteArray &key
 }
 
 /**
- * sendGetRequest sends a GET request
+ * writeGetRequest sends a GET request
+ * 
+ * After this call a @ref readGetResponse must be performed on the same stream to read get response
+ * result.
  */
 void writeGetRequest(streamWriter writer, requestHeader &hdr, byteArray &keyName) {
     hdr.opCode=GET_REQUEST;
@@ -392,6 +395,8 @@ void writeGetRequest(streamWriter writer, requestHeader &hdr, byteArray &keyName
 
 /**
  * readGetResponse read a GET response
+ * 
+ * This must be call after a @ref writeGetRequest has been executed to read get response result.
  */
 void readGetResponse(streamReader reader, responseHeader &hdr, byteArray &arr) {
     readResponseHeader(reader, hdr);
