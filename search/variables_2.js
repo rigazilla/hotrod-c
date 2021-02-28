@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ok_30',['OK',['../group__ErrorResponseCode.html#ga34e2956ff8fd55ca4bb758425bf36449',1,'hotrod-c.cpp']]]
+  ['ok_5fstatus_48',['OK_STATUS',['../group__ErrorResponseCode.html#gaed001361b8d26446658d8cb3288aac11',1,'hotrod-c.cpp']]]
 ];

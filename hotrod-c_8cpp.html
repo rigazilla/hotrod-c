@@ -96,71 +96,363 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a7bd9be9b965b65e276108a5455ccd051"><td class="memItemLeft" align="right" valign="top"><a id="a7bd9be9b965b65e276108a5455ccd051"></a>
-typedef u_int8_t(*&#160;</td><td class="memItemRight" valign="bottom"><b>streamReader</b>) (int, u_int8_t *)</td></tr>
-<tr class="separator:a7bd9be9b965b65e276108a5455ccd051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf93548fdfea91597df825231fcab921"><td class="memItemLeft" align="right" valign="top"><a id="acf93548fdfea91597df825231fcab921"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>streamReader</b>) (int len, uint8_t *val)</td></tr>
+<tr class="separator:acf93548fdfea91597df825231fcab921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7e1db4a712fa68b078b103d9cd75af1"><td class="memItemLeft" align="right" valign="top"><a id="ae7e1db4a712fa68b078b103d9cd75af1"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>streamWriter</b>) (int len, uint8_t *val)</td></tr>
+<tr class="separator:ae7e1db4a712fa68b078b103d9cd75af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ab7b72fe28bbab32f182f1d2489cc8d7b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#ab7b72fe28bbab32f182f1d2489cc8d7b">readByte</a> (streamReader reader)</td></tr>
+<tr class="separator:ab7b72fe28bbab32f182f1d2489cc8d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae77c0be3ada234021aa6b3ef579b8786"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#ae77c0be3ada234021aa6b3ef579b8786">writeByte</a> (streamWriter writer, uint8_t val)</td></tr>
+<tr class="separator:ae77c0be3ada234021aa6b3ef579b8786"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8ec7d3d664a4afcc35b28dab697a0f1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#ab8ec7d3d664a4afcc35b28dab697a0f1">readVInt</a> (streamReader reader)</td></tr>
 <tr class="separator:ab8ec7d3d664a4afcc35b28dab697a0f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a327971166407a2c9644fc64ca6116267"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a327971166407a2c9644fc64ca6116267">writeVInt</a> (streamWriter writer, uint32_t val)</td></tr>
+<tr class="separator:a327971166407a2c9644fc64ca6116267"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a413d0bce7d3c3bb63045faf7487dcf2f"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a413d0bce7d3c3bb63045faf7487dcf2f">readVLong</a> (streamReader reader)</td></tr>
 <tr class="separator:a413d0bce7d3c3bb63045faf7487dcf2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bdd5f7bc91f91d8a67bdd6984a01c06"><td class="memItemLeft" align="right" valign="top">u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a6bdd5f7bc91f91d8a67bdd6984a01c06">readByte</a> (streamReader reader)</td></tr>
-<tr class="separator:a6bdd5f7bc91f91d8a67bdd6984a01c06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae63e5dce10cad2647f1c4e547f3d9f9d"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#ae63e5dce10cad2647f1c4e547f3d9f9d">readBytes</a> (streamReader reader, u_int8_t *&amp;str)</td></tr>
-<tr class="separator:ae63e5dce10cad2647f1c4e547f3d9f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9adca9db19828c3df65efd818578d594"><td class="memItemLeft" align="right" valign="top"><a id="a9adca9db19828c3df65efd818578d594"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>readResponseError</b> (u_int8_t status, streamReader reader, u_int8_t *&amp;error)</td></tr>
-<tr class="separator:a9adca9db19828c3df65efd818578d594"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3cb96fadb263e51e027d39b1618b974"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#ae3cb96fadb263e51e027d39b1618b974">readResponseHeader</a> (streamReader reader, <a class="el" href="structresponseHeader.html">responseHeader</a> &amp;hdr, int &amp;errcode, u_int8_t *&amp;errmessage)</td></tr>
-<tr class="separator:ae3cb96fadb263e51e027d39b1618b974"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af68a9b4550d013b8a4cbd5c48b2ff64b"><td class="memItemLeft" align="right" valign="top"><a id="af68a9b4550d013b8a4cbd5c48b2ff64b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>say_hello</b> ()</td></tr>
-<tr class="separator:af68a9b4550d013b8a4cbd5c48b2ff64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8327dcc36c7ad31ea33cf78b88b5f687"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a8327dcc36c7ad31ea33cf78b88b5f687">writeVLong</a> (streamWriter writer, uint64_t val)</td></tr>
+<tr class="separator:a8327dcc36c7ad31ea33cf78b88b5f687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28bb5e9d317e38488790e8d1715a8871"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a28bb5e9d317e38488790e8d1715a8871">readBytes</a> (streamReader reader, uint8_t *&amp;str)</td></tr>
+<tr class="separator:a28bb5e9d317e38488790e8d1715a8871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f363764326b82519d2ce94d6a07628e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a7f363764326b82519d2ce94d6a07628e">writeBytes</a> (streamWriter writer, uint8_t *&amp;str, uint32_t len)</td></tr>
+<tr class="separator:a7f363764326b82519d2ce94d6a07628e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a7d5d9ffc258d722de022612ef63e6a"><td class="memItemLeft" align="right" valign="top"><a id="a0a7d5d9ffc258d722de022612ef63e6a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>readResponseError</b> (uint8_t status, streamReader reader, uint8_t *&amp;errorMsg)</td></tr>
+<tr class="separator:a0a7d5d9ffc258d722de022612ef63e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a498ac8078b02dabd915ac587aece5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a6a498ac8078b02dabd915ac587aece5d">readResponseHeader</a> (streamReader reader, <a class="el" href="structresponseHeader.html">responseHeader</a> &amp;hdr)</td></tr>
+<tr class="separator:a6a498ac8078b02dabd915ac587aece5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab7eab1bd4d2550318527d792d30aa9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#aab7eab1bd4d2550318527d792d30aa9a">writeRequestHeader</a> (streamWriter writer, <a class="el" href="structrequestHeader.html">requestHeader</a> hdr)</td></tr>
+<tr class="separator:aab7eab1bd4d2550318527d792d30aa9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80edf3a2b92d005c69e0ab710139718c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a80edf3a2b92d005c69e0ab710139718c">writeRequestWithKey</a> (streamWriter writer, <a class="el" href="structrequestHeader.html">requestHeader</a> &amp;hdr, <a class="el" href="structbyteArray.html">byteArray</a> &amp;keyName)</td></tr>
+<tr class="separator:a80edf3a2b92d005c69e0ab710139718c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44be54d8a5813be97da89dd9e2ba0ce9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a44be54d8a5813be97da89dd9e2ba0ce9">writeGetRequest</a> (streamWriter writer, <a class="el" href="structrequestHeader.html">requestHeader</a> &amp;hdr, <a class="el" href="structbyteArray.html">byteArray</a> &amp;keyName)</td></tr>
+<tr class="separator:a44be54d8a5813be97da89dd9e2ba0ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1054a658468ed86ef3f566d90aabdb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#aa1054a658468ed86ef3f566d90aabdb8">readGetResponse</a> (streamReader reader, <a class="el" href="structresponseHeader.html">responseHeader</a> &amp;hdr, <a class="el" href="structbyteArray.html">byteArray</a> &amp;arr)</td></tr>
+<tr class="separator:aa1054a658468ed86ef3f566d90aabdb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga34e2956ff8fd55ca4bb758425bf36449"><td class="memItemLeft" align="right" valign="top">
-const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#ga34e2956ff8fd55ca4bb758425bf36449">OK</a> = 0x00</td></tr>
-<tr class="memdesc:ga34e2956ff8fd55ca4bb758425bf36449"><td class="mdescLeft">&#160;</td><td class="mdescRight">No error. <br /></td></tr>
-<tr class="separator:ga34e2956ff8fd55ca4bb758425bf36449"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga04102cec4fbe151dc4b2d19bef96724c"><td class="memItemLeft" align="right" valign="top">
-const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#ga04102cec4fbe151dc4b2d19bef96724c">INVALID_MAGIC_OR_MESSAGE_ID_STATUS</a> = 0x81</td></tr>
-<tr class="memdesc:ga04102cec4fbe151dc4b2d19bef96724c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invalid magic or message id. <br /></td></tr>
-<tr class="separator:ga04102cec4fbe151dc4b2d19bef96724c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga51dfae804905cdfe48576daa592a22ac"><td class="memItemLeft" align="right" valign="top">
-const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#ga51dfae804905cdfe48576daa592a22ac">UNKNOWN_COMMAND_STATUS</a> = 0x82</td></tr>
-<tr class="memdesc:ga51dfae804905cdfe48576daa592a22ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unknown command. <br /></td></tr>
-<tr class="separator:ga51dfae804905cdfe48576daa592a22ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5db1fc82558bc1c5d2838a923295963a"><td class="memItemLeft" align="right" valign="top">
-const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#ga5db1fc82558bc1c5d2838a923295963a">UNKNOWN_VERSION_STATUS</a> = 0x83</td></tr>
-<tr class="memdesc:ga5db1fc82558bc1c5d2838a923295963a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unknown version. <br /></td></tr>
-<tr class="separator:ga5db1fc82558bc1c5d2838a923295963a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8fb9ea3dcd509c2ea3b3d7cf61fe1019"><td class="memItemLeft" align="right" valign="top">
-const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#ga8fb9ea3dcd509c2ea3b3d7cf61fe1019">REQUEST_PARSING_ERROR_STATUS</a> = 0x84</td></tr>
-<tr class="memdesc:ga8fb9ea3dcd509c2ea3b3d7cf61fe1019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request parsing error. <br /></td></tr>
-<tr class="separator:ga8fb9ea3dcd509c2ea3b3d7cf61fe1019"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaffc86d9bfd2160bd48f457708ad5f5b9"><td class="memItemLeft" align="right" valign="top">
-const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#gaffc86d9bfd2160bd48f457708ad5f5b9">SERVER_ERROR_STATUS</a> = 0x85</td></tr>
-<tr class="memdesc:gaffc86d9bfd2160bd48f457708ad5f5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Server Error. <br /></td></tr>
-<tr class="separator:gaffc86d9bfd2160bd48f457708ad5f5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga597eeaf2df3d0edeb7622889f0654771"><td class="memItemLeft" align="right" valign="top">
-const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#ga597eeaf2df3d0edeb7622889f0654771">COMMAND_TIMEOUT_STATUS</a> = 0x86</td></tr>
-<tr class="memdesc:ga597eeaf2df3d0edeb7622889f0654771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command timed out. <br /></td></tr>
-<tr class="separator:ga597eeaf2df3d0edeb7622889f0654771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaed001361b8d26446658d8cb3288aac11"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#gaed001361b8d26446658d8cb3288aac11">OK_STATUS</a> = 0x00</td></tr>
+<tr class="memdesc:gaed001361b8d26446658d8cb3288aac11"><td class="mdescLeft">&#160;</td><td class="mdescRight">No error. <br /></td></tr>
+<tr class="separator:gaed001361b8d26446658d8cb3288aac11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa845f9a5bbdd0f512ff2795f7fee52be"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#gaa845f9a5bbdd0f512ff2795f7fee52be">INVALID_MAGIC_OR_MESSAGE_ID_STATUS</a> = 0x81</td></tr>
+<tr class="memdesc:gaa845f9a5bbdd0f512ff2795f7fee52be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invalid magic or message id. <br /></td></tr>
+<tr class="separator:gaa845f9a5bbdd0f512ff2795f7fee52be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab0be26c4cbfda7e005151f65385a0fc1"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#gab0be26c4cbfda7e005151f65385a0fc1">UNKNOWN_COMMAND_STATUS</a> = 0x82</td></tr>
+<tr class="memdesc:gab0be26c4cbfda7e005151f65385a0fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unknown command. <br /></td></tr>
+<tr class="separator:gab0be26c4cbfda7e005151f65385a0fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga60a052cf625ced23b948e06f643b75ac"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#ga60a052cf625ced23b948e06f643b75ac">UNKNOWN_VERSION_STATUS</a> = 0x83</td></tr>
+<tr class="memdesc:ga60a052cf625ced23b948e06f643b75ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unknown version. <br /></td></tr>
+<tr class="separator:ga60a052cf625ced23b948e06f643b75ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga70e10d78dbdeee853f99f5a30cca9484"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#ga70e10d78dbdeee853f99f5a30cca9484">REQUEST_PARSING_ERROR_STATUS</a> = 0x84</td></tr>
+<tr class="memdesc:ga70e10d78dbdeee853f99f5a30cca9484"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request parsing error. <br /></td></tr>
+<tr class="separator:ga70e10d78dbdeee853f99f5a30cca9484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0ca623fbfe87c315fe27305b2ac5aacf"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#ga0ca623fbfe87c315fe27305b2ac5aacf">SERVER_ERROR_STATUS</a> = 0x85</td></tr>
+<tr class="memdesc:ga0ca623fbfe87c315fe27305b2ac5aacf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Server Error. <br /></td></tr>
+<tr class="separator:ga0ca623fbfe87c315fe27305b2ac5aacf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae06cb3f709a69d59278e7033b822eb82"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ErrorResponseCode.html#gae06cb3f709a69d59278e7033b822eb82">COMMAND_TIMEOUT_STATUS</a> = 0x86</td></tr>
+<tr class="memdesc:gae06cb3f709a69d59278e7033b822eb82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command timed out. <br /></td></tr>
+<tr class="separator:gae06cb3f709a69d59278e7033b822eb82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa121ba8a91d1b7580239cde8cc661f99"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PUT_RESPONSE</b> = 0x02</td></tr>
+<tr class="separator:gaa121ba8a91d1b7580239cde8cc661f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0a72dfd89a40358c8e268376c71efeb3"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_RESPONSE</b> = 0x04</td></tr>
+<tr class="separator:ga0a72dfd89a40358c8e268376c71efeb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga507a4347c0247f343e606df5b31d0233"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PUT_IF_ABSENT_RESPONSE</b> = 0x06</td></tr>
+<tr class="separator:ga507a4347c0247f343e606df5b31d0233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0f72a235aa01b3dacf8ff36313217a32"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REPLACE_RESPONSE</b> = 0x08</td></tr>
+<tr class="separator:ga0f72a235aa01b3dacf8ff36313217a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab9ad4e1a834aa16589ca29112bfd5d81"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REPLACE_IF_UNMODIFIED_RESPONSE</b> = 0x0A</td></tr>
+<tr class="separator:gab9ad4e1a834aa16589ca29112bfd5d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1599287afbf2a79218142fd482d43aae"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REMOVE_RESPONSE</b> = 0x0C</td></tr>
+<tr class="separator:ga1599287afbf2a79218142fd482d43aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga64b9fdf656e87b2ce02b83471c159e8b"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REMOVE_IF_UNMODIFIED_RESPONSE</b> = 0x0E</td></tr>
+<tr class="separator:ga64b9fdf656e87b2ce02b83471c159e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga76931204b9c685fd656758f4e2687840"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>CONTAINS_KEY_RESPONSE</b> = 0x10</td></tr>
+<tr class="separator:ga76931204b9c685fd656758f4e2687840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab24e94bd5f0610cebb92bc4b93e35b2c"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_WITH_VERSION_RESPONSE</b> = 0x12</td></tr>
+<tr class="separator:gab24e94bd5f0610cebb92bc4b93e35b2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3c2d4ea6395e58b82763e466bf4d77e3"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>CLEAR_RESPONSE</b> = 0x14</td></tr>
+<tr class="separator:ga3c2d4ea6395e58b82763e466bf4d77e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga59cc93f83635a024520606751da82561"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>STATS_RESPONSE</b> = 0x16</td></tr>
+<tr class="separator:ga59cc93f83635a024520606751da82561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga891c0fd3f31ec053fd89a92923e35d72"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PING_RESPONSE</b> = 0x18</td></tr>
+<tr class="separator:ga891c0fd3f31ec053fd89a92923e35d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad514eaa881cdc9e8f1e0436277500b18"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>BULK_GET_RESPONSE</b> = 0x1A</td></tr>
+<tr class="separator:gad514eaa881cdc9e8f1e0436277500b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga88d5993342d526835c7cb4519ae4b4bd"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_WITH_METADATA_RESPONSE</b> = 0x1C</td></tr>
+<tr class="separator:ga88d5993342d526835c7cb4519ae4b4bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab873365a852332625878f597f3388fd8"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>BULK_GET_KEYS_RESPONSE</b> = 0x1E</td></tr>
+<tr class="separator:gab873365a852332625878f597f3388fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4800bbfa983c0abafdf23b4bcbe1e555"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>QUERY_RESPONSE</b> = 0x20</td></tr>
+<tr class="separator:ga4800bbfa983c0abafdf23b4bcbe1e555"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga065c5ecf816f560574e2c643d41d527a"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>AUTH_MECH_LIST_RESPONSE</b> = 0x22</td></tr>
+<tr class="separator:ga065c5ecf816f560574e2c643d41d527a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga85ef82bf4d0ce75b56f9f0e7abc68d10"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>AUTH_RESPONSE</b> = 0x24</td></tr>
+<tr class="separator:ga85ef82bf4d0ce75b56f9f0e7abc68d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae39e6b446a6ad6abaedc92cb4d3e46a3"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ADD_CLIENT_LISTENER_RESPONSE</b> = 0x26</td></tr>
+<tr class="separator:gae39e6b446a6ad6abaedc92cb4d3e46a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac6c3bd6e8eb282d64139bb8d2e9c65b1"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REMOVE_CLIENT_LISTENER_RESPONSE</b> = 0x28</td></tr>
+<tr class="separator:gac6c3bd6e8eb282d64139bb8d2e9c65b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61d0e94f332c2dde258e3f4f0d63ab75"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>SIZE_RESPONSE</b> = 0x2A</td></tr>
+<tr class="separator:ga61d0e94f332c2dde258e3f4f0d63ab75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga938188f076150de42792f0ecd30523d9"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>EXEC_RESPONSE</b> = 0x2C</td></tr>
+<tr class="separator:ga938188f076150de42792f0ecd30523d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaad1f2d8697c907cad3e91b242b525e45"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PUT_ALL_RESPONSE</b> = 0x2E</td></tr>
+<tr class="separator:gaad1f2d8697c907cad3e91b242b525e45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1fe86e5d760070e258edd17246b1ecb3"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_ALL_RESPONSE</b> = 0x30</td></tr>
+<tr class="separator:ga1fe86e5d760070e258edd17246b1ecb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga74d05b7ddb468d7f237ad210963ec73e"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ITERATION_NEXT_RESPONSE</b> = 0x34</td></tr>
+<tr class="separator:ga74d05b7ddb468d7f237ad210963ec73e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga165e50fbaa71784f2439d99d0cc5d0f5"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ITERATION_END_RESPONSE</b> = 0x36</td></tr>
+<tr class="separator:ga165e50fbaa71784f2439d99d0cc5d0f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa4c62269fa74912df504d21252f7fb1b"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ITERATION_START_RESPONSE</b> = 0x32</td></tr>
+<tr class="separator:gaa4c62269fa74912df504d21252f7fb1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1d55c4aec441f2398d5c978c6fa0bdcf"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_STREAM_RESPONSE</b> = 0x38</td></tr>
+<tr class="separator:ga1d55c4aec441f2398d5c978c6fa0bdcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga28ac2206bb99e9e533d288e54aff81c8"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PUT_STREAM_RESPONSE</b> = 0x3A</td></tr>
+<tr class="separator:ga28ac2206bb99e9e533d288e54aff81c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadf97d4ad8d52dc7a7f9a05555c9c9854"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PREPARE_RESPONSE</b> = 0x3C</td></tr>
+<tr class="separator:gadf97d4ad8d52dc7a7f9a05555c9c9854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3bed8205903ab6c9386c242ca3b62ff0"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COMMIT_RESPONSE</b> = 0x3E</td></tr>
+<tr class="separator:ga3bed8205903ab6c9386c242ca3b62ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga673d0d42d008a1f47b253b0e8cd7f245"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ROLLBACK_RESPONSE</b> = 0x40</td></tr>
+<tr class="separator:ga673d0d42d008a1f47b253b0e8cd7f245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae40655328a4ed92ded5f8906ccaa88ec"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR_RESPONSE</b> = 0x50</td></tr>
+<tr class="separator:gae40655328a4ed92ded5f8906ccaa88ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabcfafb0b30bc4f20e14fa051a35d61ce"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>CACHE_ENTRY_CREATED_EVENT_RESPONSE</b> = 0x60</td></tr>
+<tr class="separator:gabcfafb0b30bc4f20e14fa051a35d61ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5de1aa91ef3aedfd89f16b06701e482c"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>CACHE_ENTRY_MODIFIED_EVENT_RESPONSE</b> = 0x61</td></tr>
+<tr class="separator:ga5de1aa91ef3aedfd89f16b06701e482c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0bae1509bd547b2e29aca0e6ff97e187"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>CACHE_ENTRY_REMOVED_EVENT_RESPONSE</b> = 0x62</td></tr>
+<tr class="separator:ga0bae1509bd547b2e29aca0e6ff97e187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga74320b7b9d72e75f2d734e38a616ebb3"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>CACHE_ENTRY_EXPIRED_EVENT_RESPONSE</b> = 0x63</td></tr>
+<tr class="separator:ga74320b7b9d72e75f2d734e38a616ebb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad9ce49dd45fbe6985e2bf8f20d04fc46"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_CREATE_RESPONSE</b> = 0x4C</td></tr>
+<tr class="separator:gad9ce49dd45fbe6985e2bf8f20d04fc46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga075826f08e13711d4c97a67034125033"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_GET_CONFIGURATION_RESPONSE</b> = 0x4E</td></tr>
+<tr class="separator:ga075826f08e13711d4c97a67034125033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1f5dde5c0a37123676c018bf3ea513be"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_IS_DEFINED_RESPONSE</b> = 0x51</td></tr>
+<tr class="separator:ga1f5dde5c0a37123676c018bf3ea513be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga063d16166a635a2599e07c793989b1ec"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_ADD_AND_GET_RESPONSE</b> = 0x53</td></tr>
+<tr class="separator:ga063d16166a635a2599e07c793989b1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadbb06f4463fd2a5504c0c66e3f184833"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_RESET_RESPONSE</b> = 0x55</td></tr>
+<tr class="separator:gadbb06f4463fd2a5504c0c66e3f184833"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad1490ae186ca477dfd95fee5aeed6f51"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_GET_RESPONSE</b> = 0x57</td></tr>
+<tr class="separator:gad1490ae186ca477dfd95fee5aeed6f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6626ccc30b1e0136481c0b01f8288e6e"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_CAS_RESPONSE</b> = 0x59</td></tr>
+<tr class="separator:ga6626ccc30b1e0136481c0b01f8288e6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga246d4e3150d6b9ce876ee6ab54100451"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_ADD_LISTENER_RESPONSE</b> = 0x5B</td></tr>
+<tr class="separator:ga246d4e3150d6b9ce876ee6ab54100451"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga94c678e11243480903e6cf85a2ab86ba"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_REMOVE_LISTENER_RESPONSE</b> = 0x5D</td></tr>
+<tr class="separator:ga94c678e11243480903e6cf85a2ab86ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6343b73eb9973e0f00fa90c94c91a32a"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_REMOVE_RESPONSE</b> = 0x5F</td></tr>
+<tr class="separator:ga6343b73eb9973e0f00fa90c94c91a32a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga81ca209b6332495a61cbf43f53c077f2"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_GET_NAMES_RESPONSE</b> = 0x65</td></tr>
+<tr class="separator:ga81ca209b6332495a61cbf43f53c077f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf80f854d3fc79c12b4cd27d1f3325030"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_EVENT_RESPONSE</b> = 0x66</td></tr>
+<tr class="separator:gaf80f854d3fc79c12b4cd27d1f3325030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac2e5987c3097bff1b986c31163ed08d6"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PUT_REQUEST</b> = 0x01</td></tr>
+<tr class="separator:gac2e5987c3097bff1b986c31163ed08d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab15075d8d973672c78b7a3b85aebaefa"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_REQUEST</b> = 0x03</td></tr>
+<tr class="separator:gab15075d8d973672c78b7a3b85aebaefa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga22909823efe953dc8551b78e11000269"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PUT_IF_ABSENT_REQUEST</b> = 0x05</td></tr>
+<tr class="separator:ga22909823efe953dc8551b78e11000269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga955ea62ca434d0ce006a09554e7d8005"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REPLACE_REQUEST</b> = 0x07</td></tr>
+<tr class="separator:ga955ea62ca434d0ce006a09554e7d8005"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga02bf236d92e4e17ff43e29c53d5c11ab"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REPLACE_IF_UNMODIFIED_REQUEST</b> = 0x09</td></tr>
+<tr class="separator:ga02bf236d92e4e17ff43e29c53d5c11ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadc3197fbded33b9f44d8cfff2b1fff5a"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REMOVE_REQUEST</b> = 0x0B</td></tr>
+<tr class="separator:gadc3197fbded33b9f44d8cfff2b1fff5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabdb6278a55f036e444cb56f0ebb76c73"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REMOVE_IF_UNMODIFIED_REQUEST</b> = 0x0D</td></tr>
+<tr class="separator:gabdb6278a55f036e444cb56f0ebb76c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8521f52197662f4cecb8cf90b5dea8d7"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>CONTAINS_KEY_REQUEST</b> = 0x0F</td></tr>
+<tr class="separator:ga8521f52197662f4cecb8cf90b5dea8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e34f797b4cccfc2067fdb4dd09e323f"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_WITH_VERSION_REQUEST</b> = 0x11</td></tr>
+<tr class="separator:ga1e34f797b4cccfc2067fdb4dd09e323f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga614f33f09cf96bab7c49b80d8ee38c68"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>CLEAR_REQUEST</b> = 0x13</td></tr>
+<tr class="separator:ga614f33f09cf96bab7c49b80d8ee38c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab64bd4b929dee30591840594842b0e91"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>STATS_REQUEST</b> = 0x15</td></tr>
+<tr class="separator:gab64bd4b929dee30591840594842b0e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2f929b8de16b6304366b459482d61ac"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PING_REQUEST</b> = 0x17</td></tr>
+<tr class="separator:gaa2f929b8de16b6304366b459482d61ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8d49e4e31972085436759cb9b86dcaab"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>BULK_GET_REQUEST</b> = 0x19</td></tr>
+<tr class="separator:ga8d49e4e31972085436759cb9b86dcaab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2b1226c0e99f2feb7afa51b7b41a3d99"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_WITH_METADATA_REQUEST</b> = 0x1B</td></tr>
+<tr class="separator:ga2b1226c0e99f2feb7afa51b7b41a3d99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9c5fa21e673ac7ace091e83bfa0b30ab"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>BULK_GET_KEYS_REQUEST</b> = 0x1D</td></tr>
+<tr class="separator:ga9c5fa21e673ac7ace091e83bfa0b30ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga29dca6ac19ab08fd33825b6b13ab7964"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>QUERY_REQUEST</b> = 0x1F</td></tr>
+<tr class="separator:ga29dca6ac19ab08fd33825b6b13ab7964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae33b509ca0f4a4721aee123b33112d73"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>AUTH_MECH_LIST_REQUEST</b> = 0x21</td></tr>
+<tr class="separator:gae33b509ca0f4a4721aee123b33112d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaabb59e1f7aaecf0dd849666f7118f2b"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>AUTH_REQUEST</b> = 0x23</td></tr>
+<tr class="separator:gaaabb59e1f7aaecf0dd849666f7118f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacca3b5435d3fb26e1aca2e0621c55068"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ADD_CLIENT_LISTENER_REQUEST</b> = 0x25</td></tr>
+<tr class="separator:gacca3b5435d3fb26e1aca2e0621c55068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5a9ee91f34a59aed0b7e5a73246d9fce"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>REMOVE_CLIENT_LISTENER_REQUEST</b> = 0x27</td></tr>
+<tr class="separator:ga5a9ee91f34a59aed0b7e5a73246d9fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e4a46d723f1c7aefccd39bc67ae34d4"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>SIZE_REQUEST</b> = 0x29</td></tr>
+<tr class="separator:ga1e4a46d723f1c7aefccd39bc67ae34d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga13a730a1c0e98e96b83d2296a54576b3"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>EXEC_REQUEST</b> = 0x2B</td></tr>
+<tr class="separator:ga13a730a1c0e98e96b83d2296a54576b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaba9080c241f943d6b2530e1d787c79a6"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PUT_ALL_REQUEST</b> = 0x2D</td></tr>
+<tr class="separator:gaba9080c241f943d6b2530e1d787c79a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga56496baac417f6022846a18d3df79689"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_ALL_REQUEST</b> = 0x2F</td></tr>
+<tr class="separator:ga56496baac417f6022846a18d3df79689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa309b243f700afce710ecce6382ec8ad"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ITERATION_START_REQUEST</b> = 0x31</td></tr>
+<tr class="separator:gaa309b243f700afce710ecce6382ec8ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafb38c598d7e259d16126476c2d0ab5b5"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ITERATION_NEXT_REQUEST</b> = 0x33</td></tr>
+<tr class="separator:gafb38c598d7e259d16126476c2d0ab5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0cf3d6723ebe8209fa3d11b2801ed91"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ITERATION_END_REQUEST</b> = 0x35</td></tr>
+<tr class="separator:gac0cf3d6723ebe8209fa3d11b2801ed91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf75ca60f05cad92703a7a2a1060d8b82"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>GET_STREAM_REQUEST</b> = 0x37</td></tr>
+<tr class="separator:gaf75ca60f05cad92703a7a2a1060d8b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadd0d9f485f1e1c18fff1117f3c1bae4c"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PUT_STREAM_REQUEST</b> = 0x39</td></tr>
+<tr class="separator:gadd0d9f485f1e1c18fff1117f3c1bae4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1c035215df49d10a74b7cf42b766a1e7"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>PREPARE_REQUEST</b> = 0x3B</td></tr>
+<tr class="separator:ga1c035215df49d10a74b7cf42b766a1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga788b82c4c34ed9b1824f5746199df98f"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COMMIT_REQUEST</b> = 0x3D</td></tr>
+<tr class="separator:ga788b82c4c34ed9b1824f5746199df98f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga994187aad14411380c4aa97b01621283"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ROLLBACK_REQUEST</b> = 0x3F</td></tr>
+<tr class="separator:ga994187aad14411380c4aa97b01621283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabc720539240c1ebbb685357397d8f48b"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_CREATE_REQUEST</b> = 0x4B</td></tr>
+<tr class="separator:gabc720539240c1ebbb685357397d8f48b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga825163837534cee1cc03482f91b1b3b5"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_GET_CONFIGURATION_REQUEST</b> = 0x4D</td></tr>
+<tr class="separator:ga825163837534cee1cc03482f91b1b3b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaade78b64bd564e3028ae994b03871834"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_IS_DEFINED_REQUEST</b> = 0x4F</td></tr>
+<tr class="separator:gaade78b64bd564e3028ae994b03871834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga44085914df0f00cf9767a78bdf338c53"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_ADD_AND_GET_REQUEST</b> = 0x52</td></tr>
+<tr class="separator:ga44085914df0f00cf9767a78bdf338c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaba04e8b7a8f12be09224d93238678230"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_RESET_REQUEST</b> = 0x54</td></tr>
+<tr class="separator:gaba04e8b7a8f12be09224d93238678230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabfedbb0234e6931aefb30e5bf09b7060"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_GET_REQUEST</b> = 0x56</td></tr>
+<tr class="separator:gabfedbb0234e6931aefb30e5bf09b7060"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4933d107232e8cf00030d12aec767052"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_CAS_REQUEST</b> = 0x58</td></tr>
+<tr class="separator:ga4933d107232e8cf00030d12aec767052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf7ce0d3264bf83fd9dc9dd4b005e1aa1"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_ADD_LISTENER_REQUEST</b> = 0x5A</td></tr>
+<tr class="separator:gaf7ce0d3264bf83fd9dc9dd4b005e1aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga09e721872b1738172f6c2cafd76dfe97"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_REMOVE_LISTENER_REQUEST</b> = 0x5C</td></tr>
+<tr class="separator:ga09e721872b1738172f6c2cafd76dfe97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga689babed2f7c55b955b2582d26fad66f"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_REMOVE_REQUEST</b> = 0x5E</td></tr>
+<tr class="separator:ga689babed2f7c55b955b2582d26fad66f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8246b654927b37e0bdc73c584b66c3d0"><td class="memItemLeft" align="right" valign="top">
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_GET_NAMES_REQUEST</b> = 0x64</td></tr>
+<tr class="separator:ga8246b654927b37e0bdc73c584b66c3d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This is the C implementation of the hotrod 3.0 protocol for client. Use this implementation as reference for implementing other non-Java hotrod protocol. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a6bdd5f7bc91f91d8a67bdd6984a01c06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6bdd5f7bc91f91d8a67bdd6984a01c06">&#9670;&nbsp;</a></span>readByte()</h2>
+<a id="ab7b72fe28bbab32f182f1d2489cc8d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7b72fe28bbab32f182f1d2489cc8d7b">&#9670;&nbsp;</a></span>readByte()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">u_int8_t readByte </td>
+          <td class="memname">uint8_t readByte </td>
           <td>(</td>
           <td class="paramtype">streamReader&#160;</td>
           <td class="paramname"><em>reader</em></td><td>)</td>
@@ -172,14 +464,14 @@ const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 
 </div>
 </div>
-<a id="ae63e5dce10cad2647f1c4e547f3d9f9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae63e5dce10cad2647f1c4e547f3d9f9d">&#9670;&nbsp;</a></span>readBytes()</h2>
+<a id="a28bb5e9d317e38488790e8d1715a8871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28bb5e9d317e38488790e8d1715a8871">&#9670;&nbsp;</a></span>readBytes()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t readBytes </td>
+          <td class="memname">uint32_t readBytes </td>
           <td>(</td>
           <td class="paramtype">streamReader&#160;</td>
           <td class="paramname"><em>reader</em>, </td>
@@ -187,7 +479,7 @@ const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">u_int8_t *&amp;&#160;</td>
+          <td class="paramtype">uint8_t *&amp;&#160;</td>
           <td class="paramname"><em>str</em>&#160;</td>
         </tr>
         <tr>
@@ -202,14 +494,14 @@ const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 
 </div>
 </div>
-<a id="ae3cb96fadb263e51e027d39b1618b974"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3cb96fadb263e51e027d39b1618b974">&#9670;&nbsp;</a></span>readResponseHeader()</h2>
+<a id="aa1054a658468ed86ef3f566d90aabdb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1054a658468ed86ef3f566d90aabdb8">&#9670;&nbsp;</a></span>readGetResponse()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int readResponseHeader </td>
+          <td class="memname">void readGetResponse </td>
           <td>(</td>
           <td class="paramtype">streamReader&#160;</td>
           <td class="paramname"><em>reader</em>, </td>
@@ -223,14 +515,37 @@ const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>errcode</em>, </td>
+          <td class="paramtype"><a class="el" href="structbyteArray.html">byteArray</a> &amp;&#160;</td>
+          <td class="paramname"><em>arr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>readGetResponse read a GET response </p>
+
+</div>
+</div>
+<a id="a6a498ac8078b02dabd915ac587aece5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a498ac8078b02dabd915ac587aece5d">&#9670;&nbsp;</a></span>readResponseHeader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void readResponseHeader </td>
+          <td>(</td>
+          <td class="paramtype">streamReader&#160;</td>
+          <td class="paramname"><em>reader</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">u_int8_t *&amp;&#160;</td>
-          <td class="paramname"><em>errmessage</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="structresponseHeader.html">responseHeader</a> &amp;&#160;</td>
+          <td class="paramname"><em>hdr</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -253,7 +568,7 @@ const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Status Code </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">status code </td><td class="markdownTableBodyNone"><a class="el" href="group__ErrorResponseCode.html">Error response code</a>  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Error Message </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">optional </td><td class="markdownTableBodyNone">readResponseError, <a class="el" href="hotrod-c_8cpp.html#ae63e5dce10cad2647f1c4e547f3d9f9d">readBytes</a>  </td></tr>
+<td class="markdownTableBodyNone">Error Message </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">optional </td><td class="markdownTableBodyNone">readResponseError, <a class="el" href="hotrod-c_8cpp.html#a28bb5e9d317e38488790e8d1715a8871">readBytes</a>  </td></tr>
 </table>
 
 </div>
@@ -273,7 +588,7 @@ const u_int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read an int from the stream of bytes</p>
+<p>Read an unsigned int from the stream of bytes</p>
 <p>the value is represented in the stream as a sequence of bytes starting from the less significant. For each byte the most significant bit it's not part of the value but is used as a stop bit (0 means stop). Code is reported here as reference implementation: </p><pre class="fragment">uint8_t b = readByte(reader);
 reader(1, &amp;b);
 int32_t i = b &amp; 0x7F;
@@ -300,8 +615,256 @@ return i;
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read a long from the stream of bytes</p>
+<p>Read an unsigned long from the stream of bytes</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="hotrod-c_8cpp.html#ab8ec7d3d664a4afcc35b28dab697a0f1">readVInt</a> </dd></dl>
+
+</div>
+</div>
+<a id="ae77c0be3ada234021aa6b3ef579b8786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae77c0be3ada234021aa6b3ef579b8786">&#9670;&nbsp;</a></span>writeByte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeByte </td>
+          <td>(</td>
+          <td class="paramtype">streamWriter&#160;</td>
+          <td class="paramname"><em>writer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>write 1 byte to the stream </p>
+
+</div>
+</div>
+<a id="a7f363764326b82519d2ce94d6a07628e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f363764326b82519d2ce94d6a07628e">&#9670;&nbsp;</a></span>writeBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeBytes </td>
+          <td>(</td>
+          <td class="paramtype">streamWriter&#160;</td>
+          <td class="paramname"><em>writer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&amp;&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Write an byte array from the stream</p>
+<p>Array length is represented as vInt </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="hotrod-c_8cpp.html#a327971166407a2c9644fc64ca6116267">writeVInt</a> and preceed the array content </dd></dl>
+
+</div>
+</div>
+<a id="a44be54d8a5813be97da89dd9e2ba0ce9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44be54d8a5813be97da89dd9e2ba0ce9">&#9670;&nbsp;</a></span>writeGetRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeGetRequest </td>
+          <td>(</td>
+          <td class="paramtype">streamWriter&#160;</td>
+          <td class="paramname"><em>writer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrequestHeader.html">requestHeader</a> &amp;&#160;</td>
+          <td class="paramname"><em>hdr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structbyteArray.html">byteArray</a> &amp;&#160;</td>
+          <td class="paramname"><em>keyName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>sendGetRequest sends a GET request </p>
+
+</div>
+</div>
+<a id="aab7eab1bd4d2550318527d792d30aa9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab7eab1bd4d2550318527d792d30aa9a">&#9670;&nbsp;</a></span>writeRequestHeader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeRequestHeader </td>
+          <td>(</td>
+          <td class="paramtype">streamWriter&#160;</td>
+          <td class="paramname"><em>writer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrequestHeader.html">requestHeader</a>&#160;</td>
+          <td class="paramname"><em>hdr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>writeRequestHeader populates and header a 3.0 hotrod response</p>
+<p>Hotrod 3.0 response header description</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Field </th><th class="markdownTableHeadNone">Size (bytes) or type </th><th class="markdownTableHeadNone">Comment </th><th class="markdownTableHeadNone">References  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Magic </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">Valid value is 0xA0 </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Message ID </td><td class="markdownTableBodyNone">vLong </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a class="el" href="hotrod-c_8cpp.html#a413d0bce7d3c3bb63045faf7487dcf2f">readVLong</a>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Protocol Version </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Operation Code </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">request opcode </td><td class="markdownTableBodyNone">RequestOpcode  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Cache name </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">mandatory </td><td class="markdownTableBodyNone">A 0 lenght name means server default cache  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Flags </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">addRefHere TODO  </td></tr>
+</table>
+<p>Client Intelligence | 1 | Client Intelligence | Topology Id | vInt | id of the topology in use | </p>
+
+</div>
+</div>
+<a id="a80edf3a2b92d005c69e0ab710139718c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80edf3a2b92d005c69e0ab710139718c">&#9670;&nbsp;</a></span>writeRequestWithKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeRequestWithKey </td>
+          <td>(</td>
+          <td class="paramtype">streamWriter&#160;</td>
+          <td class="paramname"><em>writer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrequestHeader.html">requestHeader</a> &amp;&#160;</td>
+          <td class="paramname"><em>hdr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structbyteArray.html">byteArray</a> &amp;&#160;</td>
+          <td class="paramname"><em>keyName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>writeRequestWithKey send a request for operations that has a key as parameter</p>
+<p>This function should not be called directly, though it could be used as a general func to request execution of operations with 1 key as parameter if the specific func is missing. </p>
+
+</div>
+</div>
+<a id="a327971166407a2c9644fc64ca6116267"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a327971166407a2c9644fc64ca6116267">&#9670;&nbsp;</a></span>writeVInt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeVInt </td>
+          <td>(</td>
+          <td class="paramtype">streamWriter&#160;</td>
+          <td class="paramname"><em>writer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Write an unsigned int from the stream of bytes</p>
+<p>the value is represented in the stream as a sequence of bytes starting from the less significant. For each byte the most significant bit it's not part of the value but is used as a stop bit (0 means stop). Code is reported here as reference implementation: </p><pre class="fragment"> while (val&gt;0x7f) {
+    uint8_t b = (val &amp; 0x7f) | 0x80;
+    writeByte(writer, b);
+    val &gt;&gt;=7;
+}
+writeByte(writer, val); 
+</pre> 
+</div>
+</div>
+<a id="a8327dcc36c7ad31ea33cf78b88b5f687"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8327dcc36c7ad31ea33cf78b88b5f687">&#9670;&nbsp;</a></span>writeVLong()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeVLong </td>
+          <td>(</td>
+          <td class="paramtype">streamWriter&#160;</td>
+          <td class="paramname"><em>writer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Write an unsigned long from the stream of bytes</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="hotrod-c_8cpp.html#a327971166407a2c9644fc64ca6116267">writeVInt</a> </dd></dl>
 
 </div>
 </div>
