@@ -525,7 +525,8 @@ const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_GET_
         </tr>
       </table>
 </div><div class="memdoc">
-<p>readGetResponse read a GET response </p>
+<p>readGetResponse read a GET response</p>
+<p>This must be call after a <a class="el" href="hotrod-c_8cpp.html#a44be54d8a5813be97da89dd9e2ba0ce9">writeGetRequest</a> has been executed to read get response result. </p>
 
 </div>
 </div>
@@ -716,7 +717,8 @@ return i;
         </tr>
       </table>
 </div><div class="memdoc">
-<p>sendGetRequest sends a GET request </p>
+<p>writeGetRequest sends a GET request</p>
+<p>After this call a <a class="el" href="hotrod-c_8cpp.html#aa1054a658468ed86ef3f566d90aabdb8">readGetResponse</a> must be performed on the same stream to read get response result. </p>
 
 </div>
 </div>
