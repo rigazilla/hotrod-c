@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['ok_5fstatus_6',['OK_STATUS',['../group__ErrorResponseCode.html#gaed001361b8d26446658d8cb3288aac11',1,'hotrod-c.cpp']]],
-  ['operation_20code_20for_20request_7',['Operation code for request',['../group__RequestOpCode.html',1,'']]],
-  ['operation_20code_20for_20response_8',['Operation code for response',['../group__ResponseOpCode.html',1,'']]]
+  ['unknown_5fcommand_5fstatus_9',['UNKNOWN_COMMAND_STATUS',['../group__ErrorResponseCode.html#gab0be26c4cbfda7e005151f65385a0fc1',1,'hotrod-c.cpp']]],
+  ['unknown_5fversion_5fstatus_10',['UNKNOWN_VERSION_STATUS',['../group__ErrorResponseCode.html#ga60a052cf625ced23b948e06f643b75ac',1,'hotrod-c.cpp']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['a_20reference_20implementation_20in_20plain_20c_20for_20hotrod_20protocol_202_2e8_2b_0',['A Reference Implementation in plain C for Hotrod protocol 2.8+',['../index.html',1,'']]]
+  ['command_5ftimeout_5fstatus_0',['COMMAND_TIMEOUT_STATUS',['../group__ErrorResponseCode.html#gae06cb3f709a69d59278e7033b822eb82',1,'hotrod-c.cpp']]]
 ];
