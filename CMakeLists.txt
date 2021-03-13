@@ -5,6 +5,11 @@ include(CTest)
 enable_testing()
 
 add_library(hotrod-c src/hotrod-c.cpp)
+target_include_directories(hotrod-c PUBLIC include)
+
+add_executable(hotrod-example example/hotrodExample.cpp)
+target_include_directories(hotrod-example PRIVATE include)
+target_link_libraries(hotrod-example hotrod-c)
 
 # check if Doxygen is installed
 find_package(Doxygen)

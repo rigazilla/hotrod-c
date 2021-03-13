@@ -1,79 +1,24 @@
 #include <iostream>
 #include <stdint.h>
+#include <string.h>
+#include <hotrod-c.h>
 
-/*! \mainpage A Reference Implementation in plain C for Hotrod protocol 2.8+
-
- *
- * \section intro_sec Introduction
- *
- * This project aims to provide a C library that speeds up Infinispan Hotrod clients development and is:
- * - easy to understand and extends;
- * - easy to use and install;
- * - easy to translate in other languages.
- *
- * \section Implementing in other languages
- * 
- * C code is written as plain a possible, it should be quite easy to understand and translate.
- * 
- * Byte stream to hotrod data struct translation requires a `streamReader` function able to read bytes from
- * the stream gived a preallocated buffer and the number of bytes to be read.
- * 
- * Implementation roadmap should go through:
- * - how read n bytes     see readBytes()
- * - how to read 1 byte   see readByte()
- * - VInt                 see readVInt()
- * - VLong                see readVLong()
- * - responseHeader       see readResponseHeader() and ::responseHeader
- * 
- */
-
-/**
- * @file
- * @brief This is the C implementation of the hotrod 3.0 protocol for client.
- * Use this implementation as reference for implementing other non-Java hotrod protocol.
- */
-typedef struct {
-    int len;
-    uint8_t *buff;
-} byteArray;
-
-typedef struct {
-    uint8_t magic;
-    uint64_t messageId;
-    uint8_t version;
-    uint8_t opCode;
-    byteArray cacheName;
-    uint32_t flags;
-    uint8_t clientIntelligence;
-    uint32_t topologyId;
-} requestHeader;
-
-typedef struct {
-    uint8_t magic;
-    uint64_t messageId;
-    uint8_t opCode;
-    uint8_t status;
-    char* errorMessage;
-    uint8_t topologyChanged;
-} responseHeader;
-
-typedef void (*streamReader)(int len, uint8_t *val);
-typedef void (*streamWriter)(int len, uint8_t *val);
 
 /**
  * Read 1 byte from the stream
  */
-uint8_t readByte(streamReader reader) {
+uint8_t readByte(void* ctx, streamReader reader) {
     uint8_t val;
-    reader(1, &val);
+    reader(ctx, &val, 1);
     return val;
 }
 
 /**
  * write 1 byte to the stream
  */
-void writeByte(streamWriter writer, uint8_t val) {
-    writer(1, &val);
+void writeByte(uint8_t **buff, uint8_t val) {
+    **buff=val;
+    ++*buff;
 }
 
 /** 
@@ -93,12 +38,12 @@ void writeByte(streamWriter writer, uint8_t val) {
  *     }
  *     return i;
  */
-uint32_t readVInt(streamReader reader) {
-    uint8_t b = readByte(reader);
-    reader(1, &b);
+uint32_t readVInt(void *ctx, streamReader reader) {
+    uint8_t b = readByte(ctx, reader);
+    reader(ctx, &b, 1);
     int32_t i = b & 0x7F;
     for (int shift = 7; (b & 0x80) != 0; shift += 7) {
-        b = readByte(reader);
+        b = readByte(ctx, reader);
         i |= (b & 0x7FL) << shift;
     }
     return i;
@@ -119,13 +64,13 @@ uint32_t readVInt(streamReader reader) {
  *     }
  *     writeByte(writer, val); 
  */
-void writeVInt(streamWriter writer, uint32_t val) {
+void writeVInt(uint8_t **buff, uint32_t val) {
     while (val>0x7f) {
         uint8_t b = (val & 0x7f) | 0x80;
-        writeByte(writer, b);
+        writeByte(buff, b);
         val >>=7;
     }
-    writeByte(writer, val);
+    writeByte(buff, val);
 }
 
 /** 
@@ -133,11 +78,11 @@ void writeVInt(streamWriter writer, uint32_t val) {
  * 
  * @see readVInt
  */
-uint64_t readVLong(streamReader reader) {
-    uint8_t b = readByte(reader);
+uint64_t readVLong(void *ctx, streamReader reader) {
+    uint8_t b = readByte(ctx, reader);
     int64_t i = b & 0x7F;
     for (int shift = 7; (b & 0x80) != 0; shift += 7) {
-        b = readByte(reader);
+        b = readByte(ctx, reader);
         i |= (b & 0x7FL) << shift;
     }
     return i;
@@ -148,13 +93,13 @@ uint64_t readVLong(streamReader reader) {
  * 
  * @see writeVInt
  */
-void writeVLong(streamWriter writer, uint64_t val) {
+void writeVLong(uint8_t **buff, uint64_t val) {
     while (val>0x7f) {
         uint8_t b = (val & 0x7f) | 0x80;
-        writeByte(writer, b);
+        writeByte(buff, b);
         val >>=7;
     }
-    writeByte(writer, val);
+    writeByte(buff, val);
 }
 
 /**
@@ -163,10 +108,10 @@ void writeVLong(streamWriter writer, uint64_t val) {
  * Array length is represented as vInt @see readVInt and
  * preceed the array content
  */
-uint32_t readBytes(streamReader reader, uint8_t* &str) {
-  uint32_t size = readVInt(reader);
-  str=(uint8_t*)malloc(sizeof(uint8_t)*size);
-  reader(size, str);
+uint32_t readBytes(void *ctx, streamReader reader, uint8_t **str) {
+  uint32_t size = readVInt(ctx, reader);
+  *str=(uint8_t*)malloc(sizeof(uint8_t)*size);
+  reader(ctx, *str, size);
   return size;
 }
 
@@ -176,9 +121,12 @@ uint32_t readBytes(streamReader reader, uint8_t* &str) {
  * Array length is represented as vInt @see writeVInt and
  * preceed the array content
  */
-void writeBytes(streamWriter writer, uint8_t* &str, uint32_t len) {
-  writeVInt(writer, len);
-  writer(len, str);
+void writeBytes(uint8_t **buff, uint8_t *str, uint32_t len) {
+  writeVInt(buff, len);
+  if (len>0) {
+    memcpy(*buff, str, len);
+    *buff+=len;
+  }
 }
 
 /**
@@ -202,7 +150,7 @@ const uint8_t COMMAND_TIMEOUT_STATUS             = 0x86; ///< Command timed out
 /**@}*/
 
 /**
- * \defgroup RequestOpCode Operation code for request
+ * \defgroup ResponseOpCode Operation code for request
  * @{
  */
 const uint8_t PUT_RESPONSE                        = 0x02;
@@ -257,7 +205,7 @@ const uint8_t COUNTER_EVENT_RESPONSE              = 0x66;
 /**@}*/
 
 /**
- * \defgroup ResponseOpCode Operation code for response
+ * \defgroup RequestOpCode Operation code for response
  * @{
  */
 const uint8_t PUT_REQUEST                         = 0x01;
@@ -306,7 +254,7 @@ const uint8_t COUNTER_GET_NAMES_REQUEST           = 0x64;
 
 /**@}*/
 
-int readResponseError(uint8_t status, streamReader reader, uint8_t *&errorMsg) {
+int readResponseError(void *ctx, streamReader reader, uint8_t status, uint8_t **errorMsg) {
     switch (status) {
         case INVALID_MAGIC_OR_MESSAGE_ID_STATUS:
         case UNKNOWN_COMMAND_STATUS:
@@ -314,7 +262,7 @@ int readResponseError(uint8_t status, streamReader reader, uint8_t *&errorMsg) {
         case REQUEST_PARSING_ERROR_STATUS:
         case SERVER_ERROR_STATUS:
         case COMMAND_TIMEOUT_STATUS:
-        return readBytes(reader, errorMsg);
+        return readBytes(ctx, reader, errorMsg);
     }
     errorMsg=nullptr;
     return 0;
@@ -333,19 +281,20 @@ int readResponseError(uint8_t status, streamReader reader, uint8_t *&errorMsg) {
  * Status Code | 1 | status code | @ref ErrorResponseCode |
  * Error Message | array | optional | @ref readResponseError, @ref readBytes | 
  */
-void readResponseHeader(streamReader reader, responseHeader &hdr) {
-    hdr.magic = readByte(reader);
-    hdr.messageId = readVLong(reader);
-    hdr.opCode = readByte(reader);
-    hdr.status = readByte(reader);
+void readResponseHeader(void *ctx, streamReader reader, responseHeader *hdr) {
+    hdr->magic = readByte(ctx, reader);
+    hdr->messageId = readVLong(ctx, reader);
+    hdr->opCode = readByte(ctx, reader);
+    hdr->status = readByte(ctx, reader);
     // Following cast is true when sizeof(char)==8
-    uint8_t *errMsg; 
-    readResponseError(hdr.status, reader, errMsg);
-    hdr.errorMessage= (char*)errMsg;
+    uint8_t **errMsg;
+    readResponseError(ctx, reader, hdr->status, errMsg);
+    hdr->errorMessage= (char*)*errMsg;
+    // TODO implement here topology changes
 }
 
 /**
- *  writeRequestHeader populates and header a 3.0 hotrod response
+ *  writeRequestHeader populates and header a 2.8 hotrod response
  *  
  * Hotrod 3.0 response header description
  * 
@@ -360,15 +309,19 @@ void readResponseHeader(streamReader reader, responseHeader &hdr) {
  * Client Intelligence | 1 | @ref Client Intelligence | 
  * Topology Id | vInt | id of the topology in use |
  */
-void writeRequestHeader(streamWriter writer, requestHeader hdr) {
-    writeByte(writer, hdr.magic);
-    writeVLong(writer, hdr.messageId);
-    writeByte(writer, hdr.version);
-    writeByte(writer, hdr.opCode);
-    writeBytes(writer, hdr.cacheName.buff, hdr.cacheName.len);
-    writeVInt(writer, hdr.flags);
-    writeByte(writer, hdr.clientIntelligence);
-    writeVInt(writer, hdr.topologyId);
+int writeRequestHeader(uint8_t *buff, requestHeader *hdr) {
+    uint8_t *curs=buff;
+    writeByte(&curs, hdr->magic);
+    writeVLong(&curs, hdr->messageId);
+    writeByte(&curs, hdr->version);
+    writeByte(&curs, hdr->opCode);
+    writeBytes(&curs, hdr->cacheName.buff, hdr->cacheName.len);
+    writeVInt(&curs, hdr->flags);
+    writeByte(&curs, hdr->clientIntelligence);
+    writeVInt(&curs, hdr->topologyId);
+    writeByte(&curs, 0);
+    writeByte(&curs, 0);
+    return curs-buff;
 }
 
 /**
@@ -377,30 +330,60 @@ void writeRequestHeader(streamWriter writer, requestHeader hdr) {
  * This function should not be called directly, though it could be used as a general func
  * to request execution of operations with 1 key as parameter if the specific func is missing.
  */
-void writeRequestWithKey(streamWriter writer, requestHeader &hdr, byteArray &keyName) {
-    writeRequestHeader(writer, hdr);
-    writeBytes(writer, keyName.buff, keyName.len);
+void writeRequestWithKey(void *ctx, streamWriter writer, requestHeader *hdr, byteArray *keyName) {
+    uint8_t *buff=(uint8_t *)malloc(hdr->cacheName.len+29+5+keyName->len);
+    int len=writeRequestHeader(buff, hdr);
+    uint8_t *buff1=buff+len;
+    writeBytes(&buff1,keyName->buff,keyName->len);
+    len=buff1-buff;
+    writer(ctx, buff, len);
+    free(buff);
 }
 
-/**
- * writeGetRequest sends a GET request
- * 
- * After this call a @ref readGetResponse must be performed on the same stream to read get response
- * result.
- */
-void writeGetRequest(streamWriter writer, requestHeader &hdr, byteArray &keyName) {
-    hdr.opCode=GET_REQUEST;
-    writeRequestWithKey(writer, hdr, keyName);
+void writeGet(void *ctx, streamWriter writer, requestHeader *hdr, byteArray *keyName) {
+    hdr->opCode=GET_REQUEST;
+    writeRequestWithKey(ctx, writer, hdr, keyName);
 }
 
-/**
- * readGetResponse read a GET response
- * 
- * This must be call after a @ref writeGetRequest has been executed to read get response result.
- */
-void readGetResponse(streamReader reader, responseHeader &hdr, byteArray &arr) {
-    readResponseHeader(reader, hdr);
-    if (hdr.status == OK_STATUS) {
-       arr.len= readBytes(reader, arr.buff);
+void readGet(void *ctx, streamReader reader, responseHeader *hdr, byteArray *arr) {
+    readResponseHeader(ctx, reader, hdr);
+    if (hdr->status == OK_STATUS) {
+       arr->len= readBytes(ctx, reader, &arr->buff);
     }
 }
+
+    enum  TimeUnit {
+        SECONDS = 0x00,
+        MILLISECONDS = 0x01,
+        NANOSECONDS = 0x02,
+        MICROSECONDS = 0x03,
+        MINUTES = 0x04,
+        DAYS = 0x06,
+        HOURS = 0x05,
+        DEFAULT = 0x07,
+        INFINITUM = 0x08
+        };
+
+/**
+ * writePut send a request for a put operation
+ */
+void writePut(void *ctx, streamWriter writer, requestHeader *hdr, byteArray *keyName, byteArray *keyValue) {
+    uint8_t *buff=(uint8_t *)malloc(hdr->cacheName.len+29+5+keyName->len+5+keyValue->len);
+    hdr->opCode=PUT_REQUEST;
+    int len=writeRequestHeader(buff, hdr);
+    uint8_t *buff1=buff+len;
+    writeBytes(&buff1,keyName->buff,keyName->len);
+    writeByte(&buff1,0x88);
+    writeBytes(&buff1,keyValue->buff,keyValue->len);
+    len=buff1-buff;
+    writer(ctx, buff, len);
+    free(buff);
+}
+
+void readPut(void *ctx, streamReader reader, responseHeader *hdr, byteArray *arr) {
+    readResponseHeader(ctx, reader, hdr);
+    if (hdr->status == OK_STATUS) {
+       arr->len= readBytes(ctx, reader, &arr->buff);
+    }
+}
+
