@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <errno.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
@@ -26,7 +27,8 @@ void reader(void *ctx, uint8_t *val, int len) {
 
 void writer(void *ctx, uint8_t *val, int len) {
     streamCtx *sc = (streamCtx*)ctx;
-    int count = send(sc->socket, val, len, 0);
+    int count = send(sc->socket, val, len, MSG_NOSIGNAL);
+    printf("Oh dear, %d %s\n", errno, strerror(errno));
     if (!sc->hasError) {
         sc->hasError=errno;
     }
@@ -45,8 +47,8 @@ int main() {
     requestHeader rqh, rqPutH;
     responseHeader rsh;
     byteArray keyArr, valArr, res;
-    char* key="key";
-    char* value="value";
+    const char* key="key";
+    const char* value="value";
     keyArr.buff= (uint8_t*)key;
     keyArr.len=4;
     valArr.buff=(uint8_t*)value;
@@ -68,14 +70,48 @@ int main() {
     rqPutH.flags=0;
     rqPutH.topologyId=0x09;
 
-    writePut(&ctx, writer,&rqPutH, &keyArr, &valArr);
+    printf("Storing entry (%s,%s)\n",key, value);
+    writePut(&ctx, writer, &rqPutH, &keyArr, &valArr);
+    if (ctx.hasError) {
+        // Handle here transport error case
+        printf("writer error! %s\n", ctx.hasError, strerror(ctx.hasError));
+        exit(ctx.hasError);
+    }
     readPut(&ctx, reader, &rsh, &res);
+    if (ctx.hasError) {
+        // Handle here transport error case
+        printf("reader error! %d %s\n", ctx.hasError, strerror(ctx.hasError));
+        exit(ctx.hasError);
+    }
+    if (rsh.error.buff!=nullptr) {
+        printf("hotrod error: %.*s\n", rsh.error.len, rsh.error.buff);
+        // Handle here hotrod error case
+        free(rsh.error.buff);
+    }
     writeGet(&ctx, writer, &rqh, &keyArr);
+    if (ctx.hasError) {
+        // Handle here transport error case
+        printf("writer error! %d %s\n", ctx.hasError, strerror(ctx.hasError));
+        exit(ctx.hasError);
+    }
     readGet(&ctx, reader, &rsh, &res);
-
+    if (ctx.hasError) {
+        // Handle here transport error case
+        printf("reader error! %d %s\n", ctx.hasError, strerror(ctx.hasError));
+        exit(ctx.hasError);
+    }
+    if (rsh.error.buff!=nullptr) {
+        printf("hotrod error: %.*s\n", rsh.error.len, rsh.error.buff);
+        // Handle here the error case
+        free(rsh.error.buff);
+    } else {
+        printf("Read entry (%s,%.*s)\n",key, res.len, res.buff);
+    }
     cleaner(&ctx);
   return 0;
 }
+
+
 
 int getSocket(string addr, uint16_t port) {
     int sock = 0, valread;
@@ -86,7 +122,6 @@ int getSocket(string addr, uint16_t port) {
         return -1; 
     } 
    	int flags = fcntl(sock, F_GETFL, 0);
-	fcntl(sock, F_SETFL, flags | O_NONBLOCK);
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(port);
        
@@ -98,26 +133,7 @@ int getSocket(string addr, uint16_t port) {
     }
 
     connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
-    printf("errno=%x\n",errno);
-    if (sock < 0 && errno == EINPROGRESS) {
-		pollfd fds[1];
-		fds[0].fd = sock;
-		fds[0].events = POLLOUT;
-		auto evCount = poll(fds, 1, 0);
-		if (evCount > 0) {
-			if ((POLLOUT ^ fds[0].revents) != 0) {
-				printf("Failed to connect to %s:%d", addr, port);
-			} else {
-				int opt;
-				socklen_t optlen = sizeof(opt);
-				sock = getsockopt(sock, SOL_SOCKET, SO_ERROR, (void*) ((&opt)),
-						&optlen);
-			}
-		} else if (evCount == 0) {
-			printf("Timed out connecting to %s:%d", addr, port);
-		}
-	}
-    if (errno!=0 && errno!=0x73)
+    if (sock < 0)
     { 
         printf("\nConnection Failed \n"); 
         return -1; 

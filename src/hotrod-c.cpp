@@ -40,7 +40,6 @@ void writeByte(uint8_t **buff, uint8_t val) {
  */
 uint32_t readVInt(void *ctx, streamReader reader) {
     uint8_t b = readByte(ctx, reader);
-    reader(ctx, &b, 1);
     int32_t i = b & 0x7F;
     for (int shift = 7; (b & 0x80) != 0; shift += 7) {
         b = readByte(ctx, reader);
@@ -264,7 +263,7 @@ int readResponseError(void *ctx, streamReader reader, uint8_t status, uint8_t **
         case COMMAND_TIMEOUT_STATUS:
         return readBytes(ctx, reader, errorMsg);
     }
-    errorMsg=nullptr;
+    *errorMsg=nullptr;
     return 0;
 }
 
@@ -286,10 +285,11 @@ void readResponseHeader(void *ctx, streamReader reader, responseHeader *hdr) {
     hdr->messageId = readVLong(ctx, reader);
     hdr->opCode = readByte(ctx, reader);
     hdr->status = readByte(ctx, reader);
+    hdr->topologyChanged = readByte(ctx, reader);
+    uint8_t *errMsg;
+    hdr->error.len= readResponseError(ctx, reader, hdr->status, &errMsg);
     // Following cast is true when sizeof(char)==8
-    uint8_t **errMsg;
-    readResponseError(ctx, reader, hdr->status, errMsg);
-    hdr->errorMessage= (char*)*errMsg;
+    hdr->error.buff= errMsg;
     // TODO implement here topology changes
 }
 
@@ -382,8 +382,5 @@ void writePut(void *ctx, streamWriter writer, requestHeader *hdr, byteArray *key
 
 void readPut(void *ctx, streamReader reader, responseHeader *hdr, byteArray *arr) {
     readResponseHeader(ctx, reader, hdr);
-    if (hdr->status == OK_STATUS) {
-       arr->len= readBytes(ctx, reader, &arr->buff);
-    }
 }
 
