@@ -2,14 +2,19 @@ cmake_minimum_required(VERSION 3.0.0)
 project(hotrod-c VERSION 0.1.0 DESCRIPTION "A C library for Infinispan hotrod protocol")
 
 include(CTest)
+include(CPack)
 enable_testing()
 
 add_library(hotrod-c src/hotrod-c.cpp)
 target_include_directories(hotrod-c PUBLIC include)
 
+set(HOTROD_SRC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+
 add_executable(hotrod-example example/hotrodExample.cpp)
 target_include_directories(hotrod-example PRIVATE include)
 target_link_libraries(hotrod-example hotrod-c)
+
+add_subdirectory(test)
 
 # check if Doxygen is installed
 find_package(Doxygen)
@@ -35,4 +40,3 @@ endif (DOXYGEN_FOUND)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)

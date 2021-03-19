@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdint.h>
 #include <string.h>
 #include <hotrod-c.h>
 

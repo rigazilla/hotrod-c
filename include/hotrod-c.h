@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 /*! \mainpage A Reference Implementation in plain C for Hotrod protocol 2.8+
 
  *
