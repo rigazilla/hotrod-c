@@ -23,6 +23,8 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - uses: lukka/get-cmake@latest
     - run: sudo apt-get install doxygen
     - run: mkdir build && cd build && cmake .. && make doc_doxygen
