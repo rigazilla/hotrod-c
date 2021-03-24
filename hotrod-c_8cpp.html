@@ -521,8 +521,11 @@ const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_EVEN
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read an byte array from the stream</p>
-<p>Array length is represented as vInt </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="hotrod-c_8cpp.html#ab4f7d7ae2d1ea91d258f9198dc9b14c4">readVInt</a> and preceed the array content </dd></dl>
+<p>Read an bytes array of variable length from the stream</p>
+<p>An array is composed by two fields:</p><ul>
+<li>array length as vInt <a class="el" href="hotrod-c_8cpp.html#ab4f7d7ae2d1ea91d258f9198dc9b14c4">readVInt()</a></li>
+<li>array content as bytes </li>
+</ul>
 
 </div>
 </div>
@@ -999,7 +1002,10 @@ return i;
       </table>
 </div><div class="memdoc">
 <p>Write an byte array from the stream</p>
-<p>Array length is represented as vInt </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="hotrod-c_8cpp.html#a208a6a69330c69c1b334d65471998d8b">writeVInt</a> and preceed the array content </dd></dl>
+<p>An array is composed by two fields:</p><ul>
+<li>array length as vInt <a class="el" href="hotrod-c_8cpp.html#a208a6a69330c69c1b334d65471998d8b">writeVInt()</a></li>
+<li>array content as bytes </li>
+</ul>
 
 </div>
 </div>
