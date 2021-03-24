@@ -381,7 +381,7 @@ void readResponseHeader(void *ctx, streamReader reader, responseHeader *hdr, con
  * infoType == 1 | | | |
  * predefined mediaType | vInt | the id of a well know mediaType (TODO provide table)| |
  * infoType == 2| | repeated ServerNum times| |
- * MediaType name | array | name of the mediaType | @ref readBytes |
+ * MediaType name | array | name of the mediaType | readBytes() |
  * paramsNum | vInt | numeber of parameters for this mediaType | |
  * loop 1 | | repeated paramsNum times| |
  * param i key | array | key of the i-th param | |
@@ -436,7 +436,7 @@ void writeMediaType(uint8_t **buff, const mediaType *const mt) {
  * Field | Size (bytes) or type | Comment | References
  * ------|----------------------|---------|------------
  * Magic | 1 | Valid value is 0xA0 | |
- * Message ID | vLong | | @ref readVLong |
+ * Message ID | vLong | | readVLong() |
  * Protocol Version | 1 | | |
  * Operation Code | 1 | request opcode | @ref RequestOpcode |
  * Cache name | array | mandatory | A 0 lenght name means server default cache |
