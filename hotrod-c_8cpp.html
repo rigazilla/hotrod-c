@@ -626,7 +626,7 @@ const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_EVEN
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">infoType == 2 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">repeated ServerNum times </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">MediaType name </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">name of the <a class="el" href="structmediaType.html">mediaType</a> </td><td class="markdownTableBodyNone">ReadBytes  </td></tr>
+<td class="markdownTableBodyNone">MediaType name </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">name of the <a class="el" href="structmediaType.html">mediaType</a> </td><td class="markdownTableBodyNone"><a class="el" href="hotrod-c_8cpp.html#a9df49cb98be69785730d3dcdaf506ea9">readBytes</a>  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">paramsNum </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">numeber of parameters for this <a class="el" href="structmediaType.html">mediaType</a> </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
@@ -690,13 +690,13 @@ const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_EVEN
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Field </th><th class="markdownTableHeadNone">Size (bytes) or type </th><th class="markdownTableHeadNone">Comment </th><th class="markdownTableHeadNone">References  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">TopologyId </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">Topology id </td><td class="markdownTableBodyNone">vInt  </td></tr>
+<td class="markdownTableBodyNone">TopologyId </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">Topology id </td><td class="markdownTableBodyNone"><a class="el" href="hotrod-c_8cpp.html#ab4f7d7ae2d1ea91d258f9198dc9b14c4">readVInt()</a>  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Servers Num </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">number of nodes in the cluster </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">loop 1 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">repeated ServerNum times </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Server Addr </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">server address </td><td class="markdownTableBodyNone">ReadBytes  </td></tr>
+<td class="markdownTableBodyNone">Server Addr </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">server address </td><td class="markdownTableBodyNone"><a class="el" href="hotrod-c_8cpp.html#a9df49cb98be69785730d3dcdaf506ea9">readBytes()</a>  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Server Port </td><td class="markdownTableBodyNone">2 (short) </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
@@ -831,13 +831,13 @@ const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_EVEN
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Magic </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">Valid value is 0xA1 </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Message ID </td><td class="markdownTableBodyNone">vLong </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a class="el" href="hotrod-c_8cpp.html#a9e26b3116dfe3a474985bf6e4eb26d26">readVLong</a>  </td></tr>
+<td class="markdownTableBodyNone">Message ID </td><td class="markdownTableBodyNone">vLong </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a class="el" href="hotrod-c_8cpp.html#a9e26b3116dfe3a474985bf6e4eb26d26">readVLong()</a>  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Operation Code </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">response opcode </td><td class="markdownTableBodyNone"><a class="el" href="group__ResponseOpcode.html">Response opcode</a>  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Status Code </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">status code </td><td class="markdownTableBodyNone"><a class="el" href="group__ErrorResponseCode.html">Error response code</a>  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Error Message </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">optional </td><td class="markdownTableBodyNone">readResponseError, <a class="el" href="hotrod-c_8cpp.html#a9df49cb98be69785730d3dcdaf506ea9">readBytes</a>  </td></tr>
+<td class="markdownTableBodyNone">Error Message </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">optional </td><td class="markdownTableBodyNone">readResponseError() , <a class="el" href="hotrod-c_8cpp.html#a9df49cb98be69785730d3dcdaf506ea9">readBytes()</a>  </td></tr>
 </table>
 
 </div>
