@@ -27,7 +27,7 @@
  * - how to read 1 byte   see readByte()
  * - VInt                 see readVInt()
  * - VLong                see readVLong()
- * - responseHeader       see readResponseHeader() and ::responseHeader
+ * - responseHeader       see readResponseHeader()
  * - topology       see readNewTopology()
  * - mediaType       see readMediaType()
  * 
