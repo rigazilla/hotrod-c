@@ -26,7 +26,7 @@ uint16_t readShort(void* ctx, streamReader reader) {
 }
 
 /**
- * write 1 byte to the stream
+ * write 1 byte to the buffer
  */
 void writeByte(uint8_t **buff, uint8_t val) {
     **buff=val;
@@ -34,7 +34,7 @@ void writeByte(uint8_t **buff, uint8_t val) {
 }
 
 /**
- * write 1 short from the stream, high byte first
+ * write 1 short from the buffer, high byte first
  */
 void writeShort(uint8_t **buff, uint16_t val) {
     **buff=(uint8_t)(val>>8);
@@ -71,9 +71,9 @@ uint32_t readVInt(void *ctx, streamReader reader) {
 }
 
 /** 
- * Write an unsigned int from the stream of bytes
+ * Write an unsigned int to the buffer
  * 
- * the value is represented in the stream as a sequence of bytes
+ * the value is represented in the buffer as a sequence of bytes
  * starting from the less significant. For each byte the most significant
  * bit it's not part of the value but is used as a stop bit (0 means stop).
  * Code is reported here as reference implementation:
@@ -110,7 +110,7 @@ uint64_t readVLong(void *ctx, streamReader reader) {
 }
 
 /** 
- * Write an unsigned long from the stream of bytes
+ * Write an unsigned long as vlong to the bytes buffer
  * 
  * @see writeVInt
  */
@@ -171,7 +171,56 @@ const uint8_t COMMAND_TIMEOUT_STATUS             = 0x86; ///< Command timed out
 /**@}*/
 
 /**
- * \defgroup ResponseOpCode Operation code for request
+ * \defgroup RequestOpCode Operation code for request
+ * @{
+ */
+const uint8_t PUT_REQUEST                         = 0x01;
+const uint8_t GET_REQUEST                         = 0x03;
+const uint8_t PUT_IF_ABSENT_REQUEST               = 0x05;
+const uint8_t REPLACE_REQUEST                     = 0x07;
+const uint8_t REPLACE_IF_UNMODIFIED_REQUEST       = 0x09;
+const uint8_t REMOVE_REQUEST                      = 0x0B;
+const uint8_t REMOVE_IF_UNMODIFIED_REQUEST        = 0x0D;
+const uint8_t CONTAINS_KEY_REQUEST                = 0x0F;
+const uint8_t GET_WITH_VERSION_REQUEST            = 0x11;
+const uint8_t CLEAR_REQUEST                       = 0x13;
+const uint8_t STATS_REQUEST                       = 0x15;
+const uint8_t PING_REQUEST                        = 0x17;
+const uint8_t BULK_GET_REQUEST                    = 0x19;
+const uint8_t GET_WITH_METADATA_REQUEST           = 0x1B;
+const uint8_t BULK_GET_KEYS_REQUEST               = 0x1D;
+const uint8_t QUERY_REQUEST                       = 0x1F;
+const uint8_t AUTH_MECH_LIST_REQUEST              = 0x21;
+const uint8_t AUTH_REQUEST                        = 0x23;
+const uint8_t ADD_CLIENT_LISTENER_REQUEST         = 0x25;
+const uint8_t REMOVE_CLIENT_LISTENER_REQUEST      = 0x27;
+const uint8_t SIZE_REQUEST                        = 0x29;
+const uint8_t EXEC_REQUEST                        = 0x2B;
+const uint8_t PUT_ALL_REQUEST                     = 0x2D;
+const uint8_t GET_ALL_REQUEST                     = 0x2F;
+const uint8_t ITERATION_START_REQUEST             = 0x31;
+const uint8_t ITERATION_NEXT_REQUEST              = 0x33;
+const uint8_t ITERATION_END_REQUEST               = 0x35;
+const uint8_t GET_STREAM_REQUEST                  = 0x37;
+const uint8_t PUT_STREAM_REQUEST                  = 0x39;
+const uint8_t PREPARE_REQUEST                     = 0x3B;
+const uint8_t COMMIT_REQUEST                      = 0x3D;
+const uint8_t ROLLBACK_REQUEST                    = 0x3F;
+const uint8_t COUNTER_CREATE_REQUEST              = 0x4B;
+const uint8_t COUNTER_GET_CONFIGURATION_REQUEST   = 0x4D;
+const uint8_t COUNTER_IS_DEFINED_REQUEST          = 0x4F;
+const uint8_t COUNTER_ADD_AND_GET_REQUEST         = 0x52;
+const uint8_t COUNTER_RESET_REQUEST               = 0x54;
+const uint8_t COUNTER_GET_REQUEST                 = 0x56;
+const uint8_t COUNTER_CAS_REQUEST                 = 0x58;
+const uint8_t COUNTER_ADD_LISTENER_REQUEST        = 0x5A;
+const uint8_t COUNTER_REMOVE_LISTENER_REQUEST     = 0x5C;
+const uint8_t COUNTER_REMOVE_REQUEST              = 0x5E;
+const uint8_t COUNTER_GET_NAMES_REQUEST           = 0x64;
+/**@}*/
+
+/**
+ * \defgroup ResponseOpCode Operation code for response
  * @{
  */
 const uint8_t PUT_RESPONSE                        = 0x02;
@@ -225,56 +274,6 @@ const uint8_t COUNTER_GET_NAMES_RESPONSE          = 0x65;
 const uint8_t COUNTER_EVENT_RESPONSE              = 0x66;
 /**@}*/
 
-/**
- * \defgroup RequestOpCode Operation code for response
- * @{
- */
-const uint8_t PUT_REQUEST                         = 0x01;
-const uint8_t GET_REQUEST                         = 0x03;
-const uint8_t PUT_IF_ABSENT_REQUEST               = 0x05;
-const uint8_t REPLACE_REQUEST                     = 0x07;
-const uint8_t REPLACE_IF_UNMODIFIED_REQUEST       = 0x09;
-const uint8_t REMOVE_REQUEST                      = 0x0B;
-const uint8_t REMOVE_IF_UNMODIFIED_REQUEST        = 0x0D;
-const uint8_t CONTAINS_KEY_REQUEST                = 0x0F;
-const uint8_t GET_WITH_VERSION_REQUEST            = 0x11;
-const uint8_t CLEAR_REQUEST                       = 0x13;
-const uint8_t STATS_REQUEST                       = 0x15;
-const uint8_t PING_REQUEST                        = 0x17;
-const uint8_t BULK_GET_REQUEST                    = 0x19;
-const uint8_t GET_WITH_METADATA_REQUEST           = 0x1B;
-const uint8_t BULK_GET_KEYS_REQUEST               = 0x1D;
-const uint8_t QUERY_REQUEST                       = 0x1F;
-const uint8_t AUTH_MECH_LIST_REQUEST              = 0x21;
-const uint8_t AUTH_REQUEST                        = 0x23;
-const uint8_t ADD_CLIENT_LISTENER_REQUEST         = 0x25;
-const uint8_t REMOVE_CLIENT_LISTENER_REQUEST      = 0x27;
-const uint8_t SIZE_REQUEST                        = 0x29;
-const uint8_t EXEC_REQUEST                        = 0x2B;
-const uint8_t PUT_ALL_REQUEST                     = 0x2D;
-const uint8_t GET_ALL_REQUEST                     = 0x2F;
-const uint8_t ITERATION_START_REQUEST             = 0x31;
-const uint8_t ITERATION_NEXT_REQUEST              = 0x33;
-const uint8_t ITERATION_END_REQUEST               = 0x35;
-const uint8_t GET_STREAM_REQUEST                  = 0x37;
-const uint8_t PUT_STREAM_REQUEST                  = 0x39;
-const uint8_t PREPARE_REQUEST                     = 0x3B;
-const uint8_t COMMIT_REQUEST                      = 0x3D;
-const uint8_t ROLLBACK_REQUEST                    = 0x3F;
-const uint8_t COUNTER_CREATE_REQUEST              = 0x4B;
-const uint8_t COUNTER_GET_CONFIGURATION_REQUEST   = 0x4D;
-const uint8_t COUNTER_IS_DEFINED_REQUEST          = 0x4F;
-const uint8_t COUNTER_ADD_AND_GET_REQUEST         = 0x52;
-const uint8_t COUNTER_RESET_REQUEST               = 0x54;
-const uint8_t COUNTER_GET_REQUEST                 = 0x56;
-const uint8_t COUNTER_CAS_REQUEST                 = 0x58;
-const uint8_t COUNTER_ADD_LISTENER_REQUEST        = 0x5A;
-const uint8_t COUNTER_REMOVE_LISTENER_REQUEST     = 0x5C;
-const uint8_t COUNTER_REMOVE_REQUEST              = 0x5E;
-const uint8_t COUNTER_GET_NAMES_REQUEST           = 0x64;
-
-/**@}*/
-
 int readResponseError(void *ctx, streamReader reader, uint8_t status, uint8_t **errorMsg) {
     switch (status) {
         case INVALID_MAGIC_OR_MESSAGE_ID_STATUS:
@@ -289,6 +288,28 @@ int readResponseError(void *ctx, streamReader reader, uint8_t status, uint8_t **
     return 0;
 }
 
+/**
+ *  readNewTopolgy read a new topology description from the stream
+ *  
+ * Hotrod topology description. If the cluster topology is changed a new
+ * topology description will be attached to all the response header until
+ * the topology id sent in the request will match the new topology id.
+ * 
+ * Field | Size (bytes) or type | Comment | References
+ * ------|----------------------|---------|------------
+ * TopologyId | vInt | Topology id | @ref vInt|
+ * Servers Num | vInt | number of nodes in the cluster| |
+ * || next two fields are repeated ServerNum times||
+ * Server Addr | array | server address | @ref ReadBytes |
+ * Server Port | 2 (short)| | |
+ * Hash Func Num | 1 | hash function number id (usually 0x03) | |
+ * Segments Num | vInt | number of segments in the topology | |
+ * || next fields until the end are repeated ServerNum times||
+ * Owners Num | 1 | number of owners per segment N | |
+ * || next field is repeated OwnersNum times||
+ * Owner | vInt | server owner for this seg | |
+ */
+
 void readNewTopology(void *ctx, streamReader reader, responseHeader *hdr, const requestHeader* const reqHdr, topologyInfo *tInfo) {
     tInfo->topologyId = readVInt(ctx, reader);
     tInfo->serversNum = readVInt(ctx, reader); // Number of servers
@@ -302,10 +323,10 @@ void readNewTopology(void *ctx, streamReader reader, responseHeader *hdr, const 
         tInfo->hashFuncNum = readByte(ctx, reader); // This should always read 0x03
         if (tInfo->hashFuncNum>0) {
             tInfo->segmentsNum = readVInt(ctx, reader); // Number of segments
-            // Allocate and array of struct for owners, one struct for each segment
-            tInfo->ownersPerSegment = (uint32_t**)malloc(sizeof(uint32_t*)*tInfo->segmentsNum);
             // Allocate and array of int8 for the number of owners for each segment
             tInfo->ownersNumPerSegment = (uint8_t*)malloc(sizeof(uint8_t)*tInfo->segmentsNum);
+            // Allocate and array of struct for owners, one struct for each segment
+            tInfo->ownersPerSegment = (uint32_t**)malloc(sizeof(uint32_t*)*tInfo->segmentsNum);
             for (int i=0; i<tInfo->segmentsNum; i++) { // for each segment
                 tInfo->ownersNumPerSegment[i] = readByte(ctx, reader); // read the # of owners
                 tInfo->ownersPerSegment[i] = (uint32_t*)malloc(sizeof(uint32_t)*tInfo->ownersNumPerSegment[i]);
@@ -318,7 +339,7 @@ void readNewTopology(void *ctx, streamReader reader, responseHeader *hdr, const 
 }
 
 /**
- *  readResponseHeader populates and header a 3.0 hotrod response
+ *  readResponseHeader read a response header from the bytes stream
  *  
  * Hotrod 3.0 response header description
  * 

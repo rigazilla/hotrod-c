@@ -28,6 +28,8 @@
  * - VInt                 see readVInt()
  * - VLong                see readVLong()
  * - responseHeader       see readResponseHeader() and ::responseHeader
+ * - topology       see readNewTopology()
+ * - mediaType       see readMediaType()
  * 
  */
 
