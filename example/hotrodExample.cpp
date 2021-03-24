@@ -45,7 +45,7 @@ int main() {
     int sock = getSocket("127.0.0.1",11222);
     streamCtx ctx = {sock, 0};
     requestHeader rqh, rqPutH;
-    responseHeader rsh;
+    responseHeader rsh, rshPing;
     byteArray keyArr, valArr, res;
     const char* key="key";
     const char* value="value";
@@ -56,19 +56,33 @@ int main() {
 
     rqh.magic=0xA0;
     rqh.messageId=1;
-    rqh.clientIntelligence=CLIENT_INTELLIGENCE_BASIC;
+    rqh.clientIntelligence=CLIENT_INTELLIGENCE_HASH_DISTRIBUTION_AWARE;
     rqh.cacheName.len=0;
     rqh.version=28;
     rqh.flags=0;
-    rqh.topologyId=0x09;
+    rqh.topologyId=0x01;
+
+    mediaType mt;
+    mt.infoType=0;
+
+    rqh.keyMediaType = mt;
+    rqh.valueMediaType = mt;
 
     rqPutH.magic=0xA0;
     rqPutH.messageId=1;
-    rqPutH.clientIntelligence=CLIENT_INTELLIGENCE_BASIC;
+    rqPutH.clientIntelligence=CLIENT_INTELLIGENCE_HASH_DISTRIBUTION_AWARE;
     rqPutH.cacheName.len=0;
-    rqPutH.version=28;
+    rqPutH.version=30;
     rqPutH.flags=0;
-    rqPutH.topologyId=0x09;
+    rqPutH.topologyId=0x00;
+    rqPutH.keyMediaType = mt;
+    rqPutH.valueMediaType = mt;
+
+    topologyInfo tInfo;
+    mediaType keyMt, valueMt;
+
+    writePing(&ctx, writer, &rqPutH);
+    readPing(&ctx, reader, &rshPing, &rqPutH, &tInfo, &keyMt, &valueMt);
 
     printf("Storing entry (%s,%s)\n",key, value);
     writePut(&ctx, writer, &rqPutH, &keyArr, &valArr);
@@ -77,7 +91,7 @@ int main() {
         printf("writer error! %s\n", ctx.hasError, strerror(ctx.hasError));
         exit(ctx.hasError);
     }
-    readPut(&ctx, reader, &rsh, &res);
+    readPut(&ctx, reader, &rsh, &rqPutH, &tInfo, &res);
     if (ctx.hasError) {
         // Handle here transport error case
         printf("reader error! %d %s\n", ctx.hasError, strerror(ctx.hasError));
@@ -94,7 +108,7 @@ int main() {
         printf("writer error! %d %s\n", ctx.hasError, strerror(ctx.hasError));
         exit(ctx.hasError);
     }
-    readGet(&ctx, reader, &rsh, &res);
+    readGet(&ctx, reader, &rsh, &rqh, &tInfo, &res);
     if (ctx.hasError) {
         // Handle here transport error case
         printf("reader error! %d %s\n", ctx.hasError, strerror(ctx.hasError));

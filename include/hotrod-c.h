@@ -51,6 +51,15 @@ typedef struct {
 } byteArray;
 
 typedef struct {
+    uint8_t infoType;
+    uint32_t predefinedMediaType;
+    byteArray customMediaType;
+    uint32_t paramsNum;
+    byteArray *keys;
+    byteArray *values;
+} mediaType;
+
+typedef struct {
     uint8_t magic;
     uint64_t messageId;
     uint8_t version;
@@ -59,6 +68,8 @@ typedef struct {
     uint32_t flags;
     uint8_t clientIntelligence;
     uint32_t topologyId;
+    mediaType keyMediaType;
+    mediaType valueMediaType;
 } requestHeader;
 
 typedef struct {
@@ -69,6 +80,20 @@ typedef struct {
     byteArray error;
     uint8_t topologyChanged;
 } responseHeader;
+
+typedef struct {
+    uint32_t topologyId;
+    uint32_t serversNum;
+    byteArray *servers;
+    uint16_t *ports;
+    uint8_t hashFuncNum;
+    uint32_t segmentsNum;
+    uint8_t *ownersNumPerSegment;
+    uint32_t **ownersPerSegment;
+    uint8_t status;
+    byteArray error;
+    uint8_t topologyChanged;
+} topologyInfo;
 
 typedef void (*streamReader)(void* ctx, uint8_t *val, int len);
 typedef void (*streamWriter)(void* ctx, uint8_t *val, int len);
@@ -87,7 +112,7 @@ void writeGet(void *ctx, streamWriter writer, requestHeader *hdr, byteArray *key
  * 
  * This must be call after a @ref writeGet has been executed to read a get response result.
  */
-void readGet(void *ctx, streamReader reader, responseHeader *hdr, byteArray *arr);
+void readGet(void *ctx, streamReader reader, responseHeader *hdr, requestHeader *reqHdr, topologyInfo *tInfo, byteArray *arr);
 
 
 /**
@@ -99,4 +124,7 @@ void readGet(void *ctx, streamReader reader, responseHeader *hdr, byteArray *arr
  */
 void writePut(void *ctx, streamWriter writer, requestHeader *hdr, byteArray *keyName, byteArray *keyValue);
 
-void readPut(void *ctx, streamReader reader, responseHeader *hdr, byteArray *arr);
+void readPut(void *ctx, streamReader reader, responseHeader *hdr, requestHeader *reqHdr, topologyInfo *tInfo, byteArray *arr);
+
+void writePing(void *ctx, streamWriter writer, requestHeader *hdr);
+void readPing(void *ctx, streamReader reader, responseHeader *hdr, requestHeader *reqHdr, topologyInfo *tInfo, mediaType *keyMt, mediaType *valueMt);

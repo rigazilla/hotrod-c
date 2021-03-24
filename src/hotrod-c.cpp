@@ -13,10 +13,33 @@ uint8_t readByte(void* ctx, streamReader reader) {
 }
 
 /**
+ * Read 1 short from the stream, high byte first
+ */
+uint16_t readShort(void* ctx, streamReader reader) {
+    uint16_t val;
+    uint8_t b;
+    reader(ctx, &b, 1);
+    val = b<<8;
+    reader(ctx, &b, 1);
+    val += b;
+    return val;
+}
+
+/**
  * write 1 byte to the stream
  */
 void writeByte(uint8_t **buff, uint8_t val) {
     **buff=val;
+    ++*buff;
+}
+
+/**
+ * write 1 short from the stream, high byte first
+ */
+void writeShort(uint8_t **buff, uint16_t val) {
+    **buff=(uint8_t)(val>>8);
+    ++*buff;
+    **buff=(uint8_t)(val & 0xff);
     ++*buff;
 }
 
@@ -266,6 +289,34 @@ int readResponseError(void *ctx, streamReader reader, uint8_t status, uint8_t **
     return 0;
 }
 
+void readNewTopology(void *ctx, streamReader reader, responseHeader *hdr, const requestHeader* const reqHdr, topologyInfo *tInfo) {
+    tInfo->topologyId = readVInt(ctx, reader);
+    tInfo->serversNum = readVInt(ctx, reader); // Number of servers
+    tInfo->servers = (byteArray*)malloc(sizeof(byteArray)*tInfo->serversNum);
+    tInfo->ports = (uint16_t*)malloc(sizeof(uint16_t)*tInfo->serversNum);
+    for (int i=0; i< tInfo->serversNum; i++) { // Loop reading servers
+        tInfo->servers[i].len=readBytes(ctx, reader, &tInfo->servers[i].buff);
+        tInfo->ports[i]=readShort(ctx, reader);
+    }
+    if (reqHdr->clientIntelligence==CLIENT_INTELLIGENCE_HASH_DISTRIBUTION_AWARE) {
+        tInfo->hashFuncNum = readByte(ctx, reader); // This should always read 0x03
+        if (tInfo->hashFuncNum>0) {
+            tInfo->segmentsNum = readVInt(ctx, reader); // Number of segments
+            // Allocate and array of struct for owners, one struct for each segment
+            tInfo->ownersPerSegment = (uint32_t**)malloc(sizeof(uint32_t*)*tInfo->segmentsNum);
+            // Allocate and array of int8 for the number of owners for each segment
+            tInfo->ownersNumPerSegment = (uint8_t*)malloc(sizeof(uint8_t)*tInfo->segmentsNum);
+            for (int i=0; i<tInfo->segmentsNum; i++) { // for each segment
+                tInfo->ownersNumPerSegment[i] = readByte(ctx, reader); // read the # of owners
+                tInfo->ownersPerSegment[i] = (uint32_t*)malloc(sizeof(uint32_t)*tInfo->ownersNumPerSegment[i]);
+                for (int j=0; j<tInfo->ownersNumPerSegment[i]; j++) { // read all the owner for this segment
+                    tInfo->ownersPerSegment[i][j] = readVInt(ctx, reader); 
+                }
+            }
+        }
+    }
+}
+
 /**
  *  readResponseHeader populates and header a 3.0 hotrod response
  *  
@@ -279,17 +330,60 @@ int readResponseError(void *ctx, streamReader reader, uint8_t status, uint8_t **
  * Status Code | 1 | status code | @ref ErrorResponseCode |
  * Error Message | array | optional | @ref readResponseError, @ref readBytes | 
  */
-void readResponseHeader(void *ctx, streamReader reader, responseHeader *hdr) {
+void readResponseHeader(void *ctx, streamReader reader, responseHeader *hdr, const requestHeader* const reqHdr, topologyInfo *tInfo) {
     hdr->magic = readByte(ctx, reader);
     hdr->messageId = readVLong(ctx, reader);
     hdr->opCode = readByte(ctx, reader);
     hdr->status = readByte(ctx, reader);
     hdr->topologyChanged = readByte(ctx, reader);
+    if (hdr->topologyChanged) {
+        readNewTopology(ctx, reader, hdr, reqHdr, tInfo);
+    }
     uint8_t *errMsg;
     hdr->error.len= readResponseError(ctx, reader, hdr->status, &errMsg);
     // Following cast is true when sizeof(char)==8
     hdr->error.buff= errMsg;
     // TODO implement here topology changes
+}
+
+void readMediaType(void *ctx, streamReader reader, mediaType *mt) {
+    mt->infoType = readByte(ctx, reader);
+    switch (mt->infoType) {
+        case 0:
+        break;
+        case 1:
+            mt->predefinedMediaType = readVInt(ctx,reader);
+        break;
+        case 2:
+            mt->customMediaType.len = readBytes(ctx, reader, &mt->customMediaType.buff);
+            mt->paramsNum = readVInt(ctx,reader);
+            mt->keys = (byteArray*)(sizeof(byteArray)*mt->paramsNum);
+            mt->values = (byteArray*)(sizeof(byteArray)*mt->paramsNum);
+            for (int i=0; i<mt->paramsNum; i++) {
+                mt->keys[i].len = readBytes(ctx, reader, &mt->keys[i].buff);
+                mt->values[i].len = readBytes(ctx, reader, &mt->values[i].buff);
+            }
+        break;
+    }
+}
+
+void writeMediaType(uint8_t **buff, const mediaType *const mt) {
+    switch (mt->infoType) {
+        case 0:
+            writeByte(buff, 0x00);
+        break;
+        case 1:
+            writeVInt(buff, mt->predefinedMediaType);
+        break;
+        case 2:
+            writeBytes(buff, mt->customMediaType.buff, mt->customMediaType.len);
+            writeVInt(buff, mt->paramsNum);
+            for (int i=0; i<mt->paramsNum; i++) {
+                writeBytes(buff, mt->keys[i].buff, mt->keys[i].len);
+                writeBytes(buff, mt->values[i].buff, mt->values[i].len);
+            }
+        break;
+    }
 }
 
 /**
@@ -318,8 +412,8 @@ int writeRequestHeader(uint8_t *buff, requestHeader *hdr) {
     writeVInt(&curs, hdr->flags);
     writeByte(&curs, hdr->clientIntelligence);
     writeVInt(&curs, hdr->topologyId);
-    writeByte(&curs, 0);
-    writeByte(&curs, 0);
+    writeMediaType(&curs, &hdr->keyMediaType);
+    writeMediaType(&curs, &hdr->valueMediaType);
     return curs-buff;
 }
 
@@ -344,8 +438,8 @@ void writeGet(void *ctx, streamWriter writer, requestHeader *hdr, byteArray *key
     writeRequestWithKey(ctx, writer, hdr, keyName);
 }
 
-void readGet(void *ctx, streamReader reader, responseHeader *hdr, byteArray *arr) {
-    readResponseHeader(ctx, reader, hdr);
+void readGet(void *ctx, streamReader reader, responseHeader *hdr, requestHeader *reqHdr, topologyInfo *tInfo, byteArray *arr) {
+    readResponseHeader(ctx, reader, hdr, reqHdr, tInfo);
     if (hdr->status == OK_STATUS) {
        arr->len= readBytes(ctx, reader, &arr->buff);
     }
@@ -379,7 +473,36 @@ void writePut(void *ctx, streamWriter writer, requestHeader *hdr, byteArray *key
     free(buff);
 }
 
-void readPut(void *ctx, streamReader reader, responseHeader *hdr, byteArray *arr) {
-    readResponseHeader(ctx, reader, hdr);
+void readPut(void *ctx, streamReader reader, responseHeader *hdr, requestHeader *reqHdr, topologyInfo *tInfo, byteArray *arr) {
+    readResponseHeader(ctx, reader, hdr, reqHdr, tInfo);
+}
+
+/**
+ * writePing send a request for a ping operation
+ */
+void writePing(void *ctx, streamWriter writer, requestHeader *hdr) {
+    uint8_t *buff=(uint8_t *)malloc(hdr->cacheName.len+29);
+    hdr->opCode=PING_REQUEST;
+    int len=writeRequestHeader(buff, hdr);
+    writer(ctx, buff, len);
+    free(buff);
+}
+
+/**
+ * readPing ping operation result
+ */
+void readPing(void *ctx, streamReader reader, responseHeader *hdr, requestHeader *reqHdr, topologyInfo *tInfo, mediaType *keyMt, mediaType *valueMt) {
+    uint8_t version;
+    uint32_t operationsNum;
+    uint16_t *operations;
+    readResponseHeader(ctx, reader, hdr, reqHdr, tInfo);
+    readMediaType(ctx, reader, keyMt);
+    readMediaType(ctx, reader, valueMt);
+    version = readByte(ctx, reader);
+    operationsNum = readVInt(ctx, reader);
+    operations = (uint16_t*)malloc(sizeof(uint16_t)*operationsNum);
+    for (int i=0; i<operationsNum; i++) {
+        operations[i]= readShort(ctx, reader);
+    }
 }
 
