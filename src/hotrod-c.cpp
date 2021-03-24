@@ -300,17 +300,19 @@ int readResponseError(void *ctx, streamReader reader, uint8_t status, uint8_t **
  * ------|----------------------|---------|------------
  * TopologyId | vInt | Topology id | @ref vInt|
  * Servers Num | vInt | number of nodes in the cluster| |
- * || next two fields are repeated ServerNum times||
+ *  loop 1| | repeated ServerNum times| |
  * Server Addr | array | server address | @ref ReadBytes |
  * Server Port | 2 (short)| | |
+ *  end loop 1| | | |
  * Hash Func Num | 1 | hash function number id (usually 0x03) | |
  * Segments Num | vInt | number of segments in the topology | |
- * || next fields until the end are repeated ServerNum times||
+ * loop 2 | | repeated ServerNum times| |
  * Owners Num | 1 | number of owners per segment N | |
- * || next field is repeated OwnersNum times||
+ * loop 3 | | next field is repeated OwnersNum times| |
  * Owner | vInt | server owner for this seg | |
+ * end loop 3| | | |
+ * end loop 2| | | |
  */
-
 void readNewTopology(void *ctx, streamReader reader, responseHeader *hdr, const requestHeader* const reqHdr, topologyInfo *tInfo) {
     tInfo->topologyId = readVInt(ctx, reader);
     tInfo->serversNum = readVInt(ctx, reader); // Number of servers
@@ -368,6 +370,24 @@ void readResponseHeader(void *ctx, streamReader reader, responseHeader *hdr, con
     // TODO implement here topology changes
 }
 
+
+/**
+ *  readMediaType read a mediaType from the stream
+ *  
+ * Field | Size (bytes) or type | Comment | References
+ * ------|----------------------|---------|------------
+ * infoType | 1 | type of the info | |
+ * infoType == 0 stop | | | |
+ * infoType == 1 | | | |
+ * predefined mediaType | vInt | the id of a well know mediaType (TODO provide table)| |
+ * infoType == 2| | repeated ServerNum times| |
+ * MediaType name | array | name of the mediaType | @ref ReadBytes |
+ * paramsNum | vInt | numeber of parameters for this mediaType | |
+ * loop 1 | | repeated paramsNum times| |
+ * param i key | array | key of the i-th param | |
+ * param i value | array | value of the i-th param |  |
+ *  end loop 1| | | |
+ */
 void readMediaType(void *ctx, streamReader reader, mediaType *mt) {
     mt->infoType = readByte(ctx, reader);
     switch (mt->infoType) {
