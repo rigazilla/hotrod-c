@@ -298,10 +298,10 @@ int readResponseError(void *ctx, streamReader reader, uint8_t status, uint8_t **
  * 
  * Field | Size (bytes) or type | Comment | References
  * ------|----------------------|---------|------------
- * TopologyId | vInt | Topology id | @ref vInt|
+ * TopologyId | vInt | Topology id | readVInt() |
  * Servers Num | vInt | number of nodes in the cluster| |
  *  loop 1| | repeated ServerNum times| |
- * Server Addr | array | server address | @ref ReadBytes |
+ * Server Addr | array | server address | readBytes() |
  * Server Port | 2 (short)| | |
  *  end loop 1| | | |
  * Hash Func Num | 1 | hash function number id (usually 0x03) | |
@@ -349,10 +349,10 @@ void readNewTopology(void *ctx, streamReader reader, responseHeader *hdr, const 
  * Field | Size (bytes) or type | Comment | References
  * ------|----------------------|---------|------------
  * Magic | 1 | Valid value is 0xA1 | |
- * Message ID | vLong | | @ref readVLong |
+ * Message ID | vLong | | readVLong() |
  * Operation Code | 1 | response opcode | @ref ResponseOpcode |
  * Status Code | 1 | status code | @ref ErrorResponseCode |
- * Error Message | array | optional | @ref readResponseError, @ref readBytes | 
+ * Error Message | array | optional | readResponseError() , readBytes() | 
  */
 void readResponseHeader(void *ctx, streamReader reader, responseHeader *hdr, const requestHeader* const reqHdr, topologyInfo *tInfo) {
     hdr->magic = readByte(ctx, reader);
@@ -381,7 +381,7 @@ void readResponseHeader(void *ctx, streamReader reader, responseHeader *hdr, con
  * infoType == 1 | | | |
  * predefined mediaType | vInt | the id of a well know mediaType (TODO provide table)| |
  * infoType == 2| | repeated ServerNum times| |
- * MediaType name | array | name of the mediaType | @ref ReadBytes |
+ * MediaType name | array | name of the mediaType | @ref readBytes |
  * paramsNum | vInt | numeber of parameters for this mediaType | |
  * loop 1 | | repeated paramsNum times| |
  * param i key | array | key of the i-th param | |
