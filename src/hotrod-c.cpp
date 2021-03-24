@@ -2,6 +2,7 @@
 #include <string.h>
 #include <hotrod-c.h>
 
+/** @file */ 
 
 /**
  * Read 1 byte from the stream
