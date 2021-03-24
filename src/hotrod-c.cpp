@@ -125,10 +125,11 @@ void writeVLong(uint8_t **buff, uint64_t val) {
 }
 
 /**
- * Read an byte array from the stream
+ * Read an bytes array of variable length from the stream
  * 
- * Array length is represented as vInt @see readVInt and
- * preceed the array content
+ * An array is composed by two fields:
+ * - array length as vInt readVInt()
+ * - array content as bytes
  */
 uint32_t readBytes(void *ctx, streamReader reader, uint8_t **str) {
   uint32_t size = readVInt(ctx, reader);
@@ -140,8 +141,9 @@ uint32_t readBytes(void *ctx, streamReader reader, uint8_t **str) {
 /**
  * Write an byte array from the stream
  * 
- * Array length is represented as vInt @see writeVInt and
- * preceed the array content
+ * An array is composed by two fields:
+ * - array length as vInt writeVInt()
+ * - array content as bytes
  */
 void writeBytes(uint8_t **buff, uint8_t *str, uint32_t len) {
   writeVInt(buff, len);
