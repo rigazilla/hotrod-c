@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['error_20response_20code_18',['Error response code',['../group__ErrorResponseCode.html',1,'']]]
+  ['client_20intelligence_20level_42',['Client intelligence level',['../group__ClientIntelligence.html',1,'']]]
 ];

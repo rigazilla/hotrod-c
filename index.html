@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>hotrod-c: Main Page</title>
+<title>hotrod-c: A Reference Implementation in plain C for Hotrod protocol 2.8+</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,11 +60,35 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">hotrod-c Documentation</div>  </div>
+<div class="title">A Reference Implementation in plain C for Hotrod protocol 2.8+ </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
+Introduction</h1>
+<p>This project aims to provide a C library that speeds up Infinispan Hotrod clients development and is:</p><ul>
+<li>easy to understand and extends;</li>
+<li>easy to use and install;</li>
+<li>easy to translate in other languages.</li>
+</ul>
+<h1><a class="anchor" id="Implementing"></a>
+in other languages</h1>
+<p>C code is written as plain a possible, it should be quite easy to understand and translate.</p>
+<p>User must provide two function for read/write bytes from/to the stream:</p><ul>
+<li>a <code>streamReader</code> function which read bytes from the stream gived a preallocated buffer and the number of bytes to be read.</li>
+<li>a &lsquo;streamWriter&rsquo; function which writes bytes to the stream gived a data buffer and its length. Both the functions require an opaque pointer to a context, that can be used during the execution. Context typically will contain the socket identifier and the io status.</li>
+</ul>
+<p>Implementation roadmap should go through:</p><ul>
+<li>how read n bytes see readBytes()</li>
+<li>how to read 1 byte see readByte()</li>
+<li>VInt see readVInt()</li>
+<li>VLong see readVLong()</li>
+<li><a class="el" href="structresponseHeader.html">responseHeader</a> see readResponseHeader() and <a class="el" href="structresponseHeader.html">responseHeader</a></li>
+<li>topology see readNewTopology()</li>
+<li><a class="el" href="structmediaType.html">mediaType</a> see readMediaType() </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

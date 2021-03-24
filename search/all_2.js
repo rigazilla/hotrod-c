@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['invalid_5fmagic_5for_5fmessage_5fid_5fstatus_2',['INVALID_MAGIC_OR_MESSAGE_ID_STATUS',['../group__ErrorResponseCode.html#gaa845f9a5bbdd0f512ff2795f7fee52be',1,'hotrod-c.cpp']]]
+  ['client_20intelligence_20level_2',['Client intelligence level',['../group__ClientIntelligence.html',1,'']]],
+  ['command_5ftimeout_5fstatus_3',['COMMAND_TIMEOUT_STATUS',['../group__ErrorResponseCode.html#gae06cb3f709a69d59278e7033b822eb82',1,'hotrod-c.cpp']]]
 ];

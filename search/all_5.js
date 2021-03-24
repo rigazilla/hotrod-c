@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['server_5ferror_5fstatus_8',['SERVER_ERROR_STATUS',['../group__ErrorResponseCode.html#ga0ca623fbfe87c315fe27305b2ac5aacf',1,'hotrod-c.cpp']]]
+  ['invalid_5fmagic_5for_5fmessage_5fid_5fstatus_6',['INVALID_MAGIC_OR_MESSAGE_ID_STATUS',['../group__ErrorResponseCode.html#gaa845f9a5bbdd0f512ff2795f7fee52be',1,'hotrod-c.cpp']]]
 ];
