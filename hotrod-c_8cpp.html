@@ -130,8 +130,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>readResponseError</b> 
 <tr class="separator:aef0823828ef118bafa2100499dfd7e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4505e27022a7a1b5b494f81b0aac658d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a4505e27022a7a1b5b494f81b0aac658d">readResponseHeader</a> (void *ctx, streamReader reader, <a class="el" href="structresponseHeader.html">responseHeader</a> *hdr, const <a class="el" href="structrequestHeader.html">requestHeader</a> *const reqHdr, <a class="el" href="structtopologyInfo.html">topologyInfo</a> *tInfo)</td></tr>
 <tr class="separator:a4505e27022a7a1b5b494f81b0aac658d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bacdb284abe5ff6b529a920d5562bd9"><td class="memItemLeft" align="right" valign="top"><a id="a5bacdb284abe5ff6b529a920d5562bd9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>readMediaType</b> (void *ctx, streamReader reader, <a class="el" href="structmediaType.html">mediaType</a> *mt)</td></tr>
+<tr class="memitem:a5bacdb284abe5ff6b529a920d5562bd9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hotrod-c_8cpp.html#a5bacdb284abe5ff6b529a920d5562bd9">readMediaType</a> (void *ctx, streamReader reader, <a class="el" href="structmediaType.html">mediaType</a> *mt)</td></tr>
 <tr class="separator:a5bacdb284abe5ff6b529a920d5562bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd39e7dad847e88260c0b2c96213d87f"><td class="memItemLeft" align="right" valign="top"><a id="afd39e7dad847e88260c0b2c96213d87f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeMediaType</b> (uint8_t **buff, const <a class="el" href="structmediaType.html">mediaType</a> *const mt)</td></tr>
@@ -581,6 +580,67 @@ const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_EVEN
 
 </div>
 </div>
+<a id="a5bacdb284abe5ff6b529a920d5562bd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bacdb284abe5ff6b529a920d5562bd9">&#9670;&nbsp;</a></span>readMediaType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void readMediaType </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">streamReader&#160;</td>
+          <td class="paramname"><em>reader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmediaType.html">mediaType</a> *&#160;</td>
+          <td class="paramname"><em>mt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>readMediaType read a <a class="el" href="structmediaType.html">mediaType</a> from the stream</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Field </th><th class="markdownTableHeadNone">Size (bytes) or type </th><th class="markdownTableHeadNone">Comment </th><th class="markdownTableHeadNone">References  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">infoType </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">type of the info </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">infoType == 0 stop </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">infoType == 1 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">predefined <a class="el" href="structmediaType.html">mediaType</a> </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">the id of a well know <a class="el" href="structmediaType.html">mediaType</a> (TODO provide table) </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">infoType == 2 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">repeated ServerNum times </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MediaType name </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">name of the <a class="el" href="structmediaType.html">mediaType</a> </td><td class="markdownTableBodyNone">ReadBytes  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">paramsNum </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">numeber of parameters for this <a class="el" href="structmediaType.html">mediaType</a> </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">loop 1 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">repeated paramsNum times </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">param i key </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">key of the i-th param </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">param i value </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">value of the i-th param </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">end loop 1 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+</table>
+
+</div>
+</div>
 <a id="aef0823828ef118bafa2100499dfd7e6b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aef0823828ef118bafa2100499dfd7e6b">&#9670;&nbsp;</a></span>readNewTopology()</h2>
 
@@ -633,8 +693,31 @@ const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>COUNTER_EVEN
 <td class="markdownTableBodyNone">TopologyId </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">Topology id </td><td class="markdownTableBodyNone">vInt  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Servers Num </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">number of nodes in the cluster </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">loop 1 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">repeated ServerNum times </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Server Addr </td><td class="markdownTableBodyNone">array </td><td class="markdownTableBodyNone">server address </td><td class="markdownTableBodyNone">ReadBytes  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Server Port </td><td class="markdownTableBodyNone">2 (short) </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">end loop 1 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Hash Func Num </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">hash function number id (usually 0x03) </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Segments Num </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">number of segments in the topology </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">loop 2 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">repeated ServerNum times </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Owners Num </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">number of owners per segment N </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">loop 3 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">next field is repeated OwnersNum times </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Owner </td><td class="markdownTableBodyNone">vInt </td><td class="markdownTableBodyNone">server owner for this seg </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">end loop 3 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">end loop 2 </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<p>|| next two fields are repeated ServerNum times|| Server Addr | array | server address | ReadBytes | Server Port | 2 (short)| | | Hash Func Num | 1 | hash function number id (usually 0x03) | | Segments Num | vInt | number of segments in the topology | | || next fields until the end are repeated ServerNum times|| Owners Num | 1 | number of owners per segment N | | || next field is repeated OwnersNum times|| Owner | vInt | server owner for this seg | | </p>
 
 </div>
 </div>
