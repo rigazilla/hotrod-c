@@ -10,11 +10,11 @@
  * - easy to use and install;
  * - easy to translate in other languages.
  *
- * \section Implementing in other languages
+ * \section languages_sec Implementing in other languages
  * 
- * C code is written as plain a possible, it should be quite easy to understand and translate.
+ * C code is written as plain as possible, it should be quite easy to understand and translate.
  * 
- * User must provide two function for read/write bytes from/to the stream:
+ * To avoid having to deal with system details the transport layer is leaved to the user, who will have to provide functions for read/write bytes from/to the stream:
  * - a `streamReader` function which read bytes from the stream gived a preallocated buffer
  * and the number of bytes to be read.
  * - a `streamWriter' function which writes bytes to the stream gived a data buffer and

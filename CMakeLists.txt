@@ -5,13 +5,13 @@ include(CTest)
 include(CPack)
 enable_testing()
 
-add_library(hotrod-c src/hotrod-c.cpp)
-target_include_directories(hotrod-c PUBLIC include)
+add_library(hotrod-c src/hotrod-c.cpp src/murmurHash3.cpp)
+target_include_directories(hotrod-c PUBLIC include src)
 
 set(HOTROD_SRC_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 
 add_executable(hotrod-example example/hotrodExample.cpp)
-target_include_directories(hotrod-example PRIVATE include)
+target_include_directories(hotrod-example PRIVATE include src)
 target_link_libraries(hotrod-example hotrod-c)
 
 add_subdirectory(test)
