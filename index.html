@@ -72,10 +72,10 @@ Introduction</h1>
 <li>easy to use and install;</li>
 <li>easy to translate in other languages.</li>
 </ul>
-<h1><a class="anchor" id="Implementing"></a>
-in other languages</h1>
-<p>C code is written as plain a possible, it should be quite easy to understand and translate.</p>
-<p>User must provide two function for read/write bytes from/to the stream:</p><ul>
+<h1><a class="anchor" id="languages_sec"></a>
+Implementing in other languages</h1>
+<p>C code is written as plain as possible, it should be quite easy to understand and translate.</p>
+<p>To avoid having to deal with system details the transport layer is leaved to the user, who will have to provide functions for read/write bytes from/to the stream:</p><ul>
 <li>a <code>streamReader</code> function which read bytes from the stream gived a preallocated buffer and the number of bytes to be read.</li>
 <li>a &lsquo;streamWriter&rsquo; function which writes bytes to the stream gived a data buffer and its length. Both the functions require an opaque pointer to a context, that can be used during the execution. Context typically will contain the socket identifier and the io status.</li>
 </ul>
